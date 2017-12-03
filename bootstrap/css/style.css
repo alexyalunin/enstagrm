@@ -1,7 +1,7 @@
 body{
 	background-color: #fafafa;
 	font-family: Gotham;
-}
+	}
 h1{
 	text-align: center
 }
@@ -59,7 +59,31 @@ i:hover{
 	float: left;
     width: 33%;
     padding: 1%;
-	
+    outline: none!important;	
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+#img-upload{
+    width: 100%;
+    margin: 20px auto;
 }
 
 .single_profile_photo_inner {
@@ -107,8 +131,16 @@ i:hover{
 	font-size: 25px;
 }
 .likes button:visited i, .likes button:active i, .likes button:focus i{
-	color: #6ddecf;
-	
+	color: #6a0097;	
+}
+.inbl{
+	display: inline-block;
+}
+
+#settings{
+	background-color: #fff;
+	margin: 120px auto;
+	padding-top: 20px;
 }
 .likes button, .likes button:visited, .likes button:active, .likes button:focus {
 	outline: none;
@@ -120,6 +152,8 @@ textarea{
 	border: none;
 	font-family: Helvetica;
 	font-size: small;
+	outline: none!important;
+
 }
 
 .single_profile_photo:hover{
@@ -148,7 +182,7 @@ p, p i:hover{
 	font-size: 12px;
 	float: left;
 }
-.hover p, .hober_info{
+.hover p, .hover_info{
 	display: inline-block;
 }
 
@@ -170,9 +204,22 @@ p, p i:hover{
 .wrap:hover .hover {
     opacity: 1;
 }
+.likes .date{
+	color: grey;
+	font-size: 12px;
+	font-family: Gotham;
+	text-align: left;
+	font-weight: 100;
+}
+.likes h5{
+	display: inline-block;
+}
 
-
-
+@media(max-width: 992px){
+	#myModal, .modal, .fade, .hover{
+		display: none!important;
+	}
+}
 @media(max-width:767px){
 	.info, .counters{
 		text-align: center;
@@ -185,7 +232,8 @@ p, p i:hover{
 	}
 	.navbar-nav{
 	text-align: center;
-}
+	}
+	
 	}
 
 
