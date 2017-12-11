@@ -21,17 +21,17 @@ contract Enstagrm {
     
     
     function addressIsRegistred(address _address) view public returns(bool) {
-        return addressNicknames[_address].length != 0;
+        return addressNicknames[_address] != bytes32(0x0);
     }
     
     function nicknameIsAvailable(bytes32 _nickname) view public returns(bool) {
-        return nicknameAddress[_nickname] == 0x0;
+        return nicknameAddress[_nickname] == address(0);
     }
     
     
     function register(bytes32 _nickname) public {
         require(!addressIsRegistred(msg.sender)); 
-        require(_nickname.length != 0 ); // TODO check if nickname has length more then 0
+        require(_nickname.length > 0 );
         require(nicknameIsAvailable(_nickname)); 
         
         addressNicknames[msg.sender] = _nickname;
@@ -82,27 +82,25 @@ contract Enstagrm {
     
     struct Profile {
         bytes32 realName;
-        bytes32 bio;
+        string bio;
         string urlProfileImage;
         
-        bytes32[] postIds;
+        uint32[] postIds;
         address[] followers;
         address[] followings;
-        
-        uint postCounter;
     }
 
 
     mapping (address => Profile) addressProfiles;
     
     
-    function fillProfile(bytes32 _realName, bytes32 _bio, string _ipfsLink) public onlyRegistredUser {
+    function fillProfile(bytes32 _realName, string _bio, string _ipfsLink) public onlyRegistredUser {
         addressProfiles[msg.sender].realName = _realName;
         addressProfiles[msg.sender].bio = _bio;
         addressProfiles[msg.sender].urlProfileImage = _ipfsLink;
     }
 
-    function getUserProfileInfo(address _address) view public returns(bytes32, bytes32, string) {
+    function getUserProfile(address _address) view public returns(bytes32, string, string) {
         return (
             addressProfiles[_address].realName, 
             addressProfiles[_address].bio, 
@@ -116,7 +114,7 @@ contract Enstagrm {
     //     return addressProfiles[_address].posts;
     // }
     
-    function getUserPostIds(address _address) view public returns(bytes32[]) {
+    function getUserPostIds(address _address) view public returns(uint32[]) {
         return addressProfiles[_address].postIds;
     }
     
@@ -153,7 +151,8 @@ contract Enstagrm {
     
     function follow(address _address) public onlyRegistredUser {
         require(addressIsRegistred(_address));
-        require(subscriptions[msg.sender][_address] = false);
+        require(subscriptions[msg.sender][_address] == false);
+        require(_address != msg.sender);
         
         addressProfiles[_address].followers.push(msg.sender);
         addressProfiles[msg.sender].followings.push(_address);
@@ -163,7 +162,8 @@ contract Enstagrm {
 
     function unfollow(address _address) public onlyRegistredUser {
         require(addressIsRegistred(_address));
-        require(subscriptions[msg.sender][_address] = true);
+        require(subscriptions[msg.sender][_address] == true);
+        require(_address != msg.sender);
         
         for (uint i = 0; i < countUserFollowers(_address); i++) {
             if (addressProfiles[_address].followers[i] == msg.sender) {
@@ -192,42 +192,45 @@ contract Enstagrm {
     * POST ADDING LOGIC
     * 
     */
-
-    mapping (bytes32 => Post) posts; // bytes32 are unique post ids
+    event NewPostCreated(address creator, uint32 postId, uint64 timestamp);
+    
+    Post[] posts;
     
     struct Post {
         address creator;
         string urlPhoto;
         string text;
-        uint timestamp;
+        uint64 timestamp;
         
         address[] likes;
-        bytes32[] comments; // unique comment ids
+        uint32[] comments; // unique comment ids
     }
     
 
-    function addPost(string _urlPhoto, string _text) public onlyRegistredUser {
-        require(bytes(_urlPhoto).length != 0 && bytes(_text).length != 0);
+    function addPost(string _urlPhoto, string _text) public onlyRegistredUser returns (uint32) {
+        bytes memory b1 = bytes(_urlPhoto);
+        bytes memory b2 = bytes(_text);
+        require(b1.length > 0 && b2.length > 0);
         
-        var counter = addressProfiles[msg.sender].postCounter;
-        var id = keccak256(msg.sender, counter);
-        
-        posts[id] = Post({
+        Post memory newPost = Post({
             creator: msg.sender,
             urlPhoto: _urlPhoto,
             text: _text,
-            timestamp: now,
+            timestamp: uint64(now),
             likes: new address[](0),
-            comments: new bytes32[](0)
+            comments: new uint32[](0)
         });
+        uint32 newPostId = uint32(posts.push(newPost)) - 1;
         
-        addressProfiles[msg.sender].postIds.push(id);
-        addressProfiles[msg.sender].postCounter += 1;
+        addressProfiles[msg.sender].postIds.push(newPostId);
+        
+        NewPostCreated(msg.sender, newPostId, uint64(now));
+        
+        return newPostId;
     }
     
-    
-    function getPost(bytes32 _id) view public returns(address, string, string, uint) {
-        var post = posts[_id];
+    function getPost(uint32 _id) view public returns(address, string, string, uint64) {
+        Post storage post = posts[_id];
         return (post.creator, post.urlPhoto, post.text, post.timestamp);
     }
 
@@ -239,39 +242,23 @@ contract Enstagrm {
     * 
     */
 
-    mapping (address => mapping (bytes32 => bool)) userPostLikes;
+    mapping (address => mapping (uint32 => bool)) userPostLikes;
     
     
-    function like(bytes32 _id) public onlyRegistredUser {
-        require(userPostLikes[msg.sender][_id] = false);
-        
+    function like(uint32 _id) public onlyRegistredUser {
+        require(userPostLikes[msg.sender][_id] == false);
         posts[_id].likes.push(msg.sender);
         userPostLikes[msg.sender][_id] = true;
     }
     
-    function getPostLikes(bytes32 _id) view public returns(address[]) {
+    function getPostLikes(uint32 _id) view public returns(address[]) {
         return posts[_id].likes;
     }
     
-    function countPostLikes(bytes32 _id) view public returns(uint) {
+    function countPostLikes(uint32 _id) view public returns(uint) {
         return posts[_id].likes.length;
     }
 
-    // Not yet implemented in solidity
-    //
-    // function getPostComments(bytes32 _id) view public returns(Comment[]) {
-    //     return postComments[_id];
-    // }
-    
-    function getPostComment(bytes32 _id, uint index) view public returns(address, string, uint) {
-        var comment = postComments[_id][index];
-        return (comment.creator, comment.text, comment.timestamp);
-    }
-    
-    function countPostComments(bytes32 _id) view public returns(uint) {
-        return postComments[_id].length;
-    }
-    
     
     /**
     * 
@@ -279,22 +266,38 @@ contract Enstagrm {
     * 
     */
     
-    mapping (bytes32 => Comment[]) postComments;
+    mapping (uint32 => Comment[]) postComments;
     
     struct Comment {
         address creator;
         string text;
-        uint timestamp;
+        uint64 timestamp;
     }
     
-    function comment(bytes32 _id, string _text) public onlyRegistredUser {
+    function comment(uint32 _id, string _text) public onlyRegistredUser {
         require(bytes(_text).length != 0);
         
         postComments[_id].push(Comment({
             creator: msg.sender,
             text: _text,
-            timestamp: now
+            timestamp: uint64(now)
         }));
+    }
+    
+    
+    // Not yet implemented in solidity
+    //
+    // function getPostComments(bytes32 _id) view public returns(Comment[]) {
+    //     return postComments[_id];
+    // }
+    
+    function getPostComment(uint32 _postId, uint index) view public returns(address, string, uint64) {
+        Comment storage comment = postComments[_postId][index];
+        return (comment.creator, comment.text, comment.timestamp);
+    }
+    
+    function countPostCommentsLength(uint32 _postId) view public returns(uint) {
+        return postComments[_postId].length;
     }
     
 }
