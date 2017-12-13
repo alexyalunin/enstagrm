@@ -12,6 +12,7 @@
 	<!-- Bootstrap core CSS -->
 	<link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="bootstrap/font-awesome/css/font-awesome.min.css">
+<<<<<<< HEAD
 	<!-- Custom styles for this template -->
 	<link href="bootstrap/css/style.css" rel="stylesheet">
 
@@ -195,6 +196,191 @@
 			<!-- Modal -->
 			<div id="myModalAddPhoto" class="modal fade" role="dialog">
 				<div class="modal-dialog modal-lg">
+=======
+    <!-- Custom styles for this template -->
+    <link href="bootstrap/css/style.css" rel="stylesheet">
+    
+
+	<script>
+		document.onload = () => {
+
+			const profile = getUserProfile( nick );
+
+			$("#nick-name").html( nick );
+			$("#real-name").html(profile.realName);
+			$("#bio").html(profile.bio);
+
+			document.querySelector("#avatar").setAttribute("src", profile.ipfsLink);
+
+			document.querySelector("#followers-count").innerText = countUserFollowers( nick );
+			document.querySelector("#following-count").innerText = countUserFollowings( nick );
+			document.querySelector("#wall-count").innerText = countUserPosts( nick );
+
+			/*const posts = loadPosts();
+
+			for (let post of posts) {
+			}*/
+		}
+
+	</script>
+
+
+  </head>
+  <body>
+	 
+	 <nav class="navbar navbar-expand-md navbar-light fixed-top bg-white">
+		 <div class="container">
+			 
+			 
+			 	<a class="navbar-brand" href="#"><img src="bootstrap/images/logo.png"></a>
+			 			 
+			 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			 	<span class="navbar-toggler-icon"></span>
+			 	</button>
+      
+			 	<div class="collapse navbar-collapse " style="flex-grow: 0"id="navbarCollapse">
+			 		<ul class="navbar-nav ">
+				 		<li class="nav-item ">
+			 				<a class="nav-link" href="#"><i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#myModalAddPhoto"></i></a>
+			 			</li>
+<!--
+			 			<li class="nav-item">
+			 				<a class="nav-link " href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+			 			</li>
+			 			<li class="nav-item">
+			 				<a class="nav-link" href="#"><i class="fa fa-credit-card" aria-hidden="true"></i></a>
+			 			</li>
+-->
+			 			<li class="nav-item ">
+			 				<a class="nav-link" href="profile.html"><i class="fa fa-user-o" aria-hidden="true"></i></a>
+			 				</li>
+			 			<li class="nav-item ">
+			 				<a class="nav-link" href="settings.html"><i class="fa fa-cog" aria-hidden="true"></i></a>
+			 			</li>
+			 			
+        			</ul>
+	    		</div>
+			 
+		 </div>
+    </nav>
+
+	  
+     <div class="container">
+	 	<div class="row justify-content-center">
+	 			<div class="personal-info col-12 col-sm-10 col-auto  ">
+	 				<div class="col-12 col-sm-4 " style="display: inline-block; float: left">
+		 				<img src="" id="avatar" alt="no photo" class="photo mx-auto d-block">
+	      			</div>
+		  			<div class="col-12  col-sm-8 info" style="display: inline-block; float: left">
+		  				
+		  					<div class="col-8  username"><h2 id="nick-name"></h2></div>
+			   				<ul class="col-12 counters">
+			   					<li class="col-4" id="wall-count"></li>
+			   					<li class="col-4" id="followers-count"></li>
+			   					<li class="col-4" id="following-count"></li>
+			   				</ul>
+			   				<h6 class="col-12 description"><span style="font-family: Gotham; margin-right: 20px;" id="real-name"></span><span id="bio"></span></h6>
+	       			</div>
+	 			</div>
+	      </div>
+	      <div class="row justify-content-center">
+		      <div class="profile_photos " id="profile_photos">
+			      
+			      <a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal">
+			      <div class="wrap">
+				  	<div class="hover col-12">
+					  	<div class="col-10 offset-1">
+				  		<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>
+				  		<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>
+					  	</div>
+    				</div>
+				  </div>
+			      </a>
+			       <a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal">
+			      <div class="wrap">
+				  	<div class="hover col-12">
+					  	<div class="col-10 offset-1">
+				  		<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>
+				  		<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>
+					  	</div>
+    				</div>
+				  </div>
+			      </a>
+			       <a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal">
+			      <div class="wrap">
+				  	<div class="hover col-12">
+					  	<div class="col-10 offset-1">
+				  		<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>
+				  		<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>
+					  	</div>
+    				</div>
+				  </div>
+			      </a>
+			       <a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal">
+			      <div class="wrap">
+				  	<div class="hover col-12">
+					  	<div class="col-10 offset-1">
+				  		<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>
+				  		<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>
+					  	</div>
+    				</div>
+				  </div>
+			      </a>
+			       <a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal">
+			      <div class="wrap">
+				  	<div class="hover col-12">
+					  	<div class="col-10 offset-1">
+				  		<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>
+				  		<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>
+					  	</div>
+    				</div>
+				  </div>
+			      </a>
+			       <a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal">
+			      <div class="wrap">
+				  	<div class="hover col-12">
+					  	<div class="col-10 offset-1">
+				  		<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>
+				  		<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>
+					  	</div>
+    				</div>
+				  </div>
+			      </a>
+			       <a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal">
+			      <div class="wrap">
+				  	<div class="hover col-12">
+					  	<div class="col-10 offset-1">
+				  		<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>
+				  		<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>
+					  	</div>
+    				</div>
+				  </div>
+			      </a>
+			       <a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal">
+			      <div class="wrap">
+				  	<div class="hover col-12">
+					  	<div class="col-10 offset-1">
+				  		<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>
+				  		<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>
+					  	</div>
+    				</div>
+				  </div>
+			      </a>
+			       <a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal">
+			      <div class="wrap">
+				  	<div class="hover col-12">
+					  	<div class="col-10 offset-1">
+				  		<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>
+				  		<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>
+					  	</div>
+    				</div>
+				  </div>
+			      </a>
+
+				<!-- Modal -->
+				<div id="myModalAddPhoto" class="modal fade" role="dialog">
+					<div class="modal-dialog modal-lg">
+>>>>>>> b6ad5ffaac6afb4ec8f709ac6cc7434c91ee7f31
 
 					<!-- Modal content-->
 					<div class="modal-content">
@@ -277,6 +463,7 @@
 					</div>
 					<button class="dir" style="top: 50%; right: -40px;"><i class="fa fa-angle-right fa-3x" aria-hidden="true"></i></button>
 				</div>
+<<<<<<< HEAD
 			</div>
 		</div>
 	</div>
@@ -341,4 +528,69 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 </body>
+=======
+		      	</div>
+		      </div>
+	      </div>
+
+      </div>
+      
+     	
+    </div> <!-- /container -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    
+    
+     <script>
+	      var cw = $('.single_profile_photo').width();
+		  $('.single_profile_photo').css({'height':cw+'px'});
+	    $(window).resize(function(){
+	      var cw = $('.single_profile_photo').width();
+		  $('.single_profile_photo').css({'height':cw+'px'});
+		 });
+				  
+		 
+	  </script>
+	  <script>
+		 $(document).ready( function() {
+    	$(document).on('change', '.btn-file :file', function() {
+		var input = $(this),
+			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+		input.trigger('fileselect', [label]);
+		});
+		$('.btn-file :file').on('fileselect', function(event, label) {
+		    
+		    var input = $(this).parents('.input-group').find(':text'),
+		        log = label;
+		    
+		    if( input.length ) {
+		        input.val(log);
+		    } else {
+		        if( log ) alert(log);
+		    }
+	    
+		});
+		function readURL(input) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		        
+		        reader.onload = function (e) {
+		            $('#img-upload').attr('src', e.target.result);
+		        }
+		        
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+		$("#imgInp").change(function(){
+		    readURL(this);
+		}); 	
+	});
+  </script>
+	  
+	   	      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+>>>>>>> b6ad5ffaac6afb4ec8f709ac6cc7434c91ee7f31
 </html>
