@@ -1,67 +1,51 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Enstagram</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    	<link rel="shortcut icon" href="bootstrap/images/favicon.png" type="image/png">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
 
+</body>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-      <!-- Bootstrap core CSS -->
-    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="bootstrap/font-awesome/css/font-awesome.min.css">
-    <!-- Custom styles for this template -->
-    <link href="bootstrap/css/signin.css" rel="stylesheet">
-    <link href="bootstrap/css/style.css" rel="stylesheet">
+<script src="../web3.js"></script>
+<script src="../jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../functions.js"></script>
+<script src="node_modules/routes/dist/routes.js"></script>
+<script>
 
-  </head>
-  <body>
-	 
-	 <nav class="navbar navbar-expand-md navbar-light fixed-top bg-white">
-		 <div class="container">
-			 
-			 <a class="navbar-brand" href="#"><img src="bootstrap/images/logo.png"></a>
-			 			 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-      <div class="collapse navbar-collapse col-10" id="navbarCollapse">
-	      <ul class="navbar-nav mr-auto col-2 offset-10">
-	      <li class="nav-item">
-            <a class="nav-link " href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa fa-credit-card" aria-hidden="true"></i></a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="#"><i class="fa fa-user-o" aria-hidden="true"></i></a>
-          </li>
-        </ul>
-	    </div>
-		 </div>
-    </nav>
+//    var Router = require('routes');
+//    var router = Router();
+//    var noop = function(){
+//        return "hello world!";
+//    };
+//
+//    router.addRoute("/inn", noop);
 
-	  
-     <div class="container">
+    try {
+        const auth = web3.eth.defaultAccount;
+        if (auth === undefined)
+            location = "login.html";
+        else
+            Enstagrm.addressIsRegistred(auth, (err, res) => {
+                if (err) {
+                    console.log(err);
+                    location = "login.html";
+                } else {
+                    if (res == true) {
+                        location = "profile.html";
+                    } else {
+                        location = "login.html";
+                    }
+                }
+            });
+    } catch (e) {
+        location = "login.html";
+    }
 
-      <form class="form-signin">
-        <h1 class="form-signin-heading" style="font-family: Cicle Fina">Join us today</h1>
-        <input type="text" id="inputLogin" class="form-control" placeholder="Username" required>
-       
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <p >Sign up requires the <a href="#"> metamask plugin.</a> <br>
-       However, you can still <a href="#"> explore Enstagram.</a></p>
-      </form>
+</script>
 
-    </div> <!-- /container -->
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-  </body>
 </html>

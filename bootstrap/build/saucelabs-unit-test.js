@@ -23,7 +23,7 @@ const jsUnitSaucelabs = new JSUnitSaucelabs({
   build: process.env.TRAVIS_JOB_ID
 })
 
-const testURL = 'http://localhost:3000/js/tests/index.html?hidepassed'
+const testURL = 'http://localhost:3000/js/tests/login.html?hidepassed'
 const browsersFile = require(path.resolve(__dirname, './sauce_browsers.json'))
 let jobsDone = 0
 let jobsSucceeded = 0
