@@ -70,7 +70,7 @@
 					<li class="col-4" id="followers-count"></li>
 					<li class="col-4" id="following-count"></li>
 				</ul>
-				<h6 class="col-12 description"><span style="font-family: Gotham; margin-right: 20px;" id="real-name"></span><span id="bio"></span></h6>
+				<h6 class="col-12 description"><span style="font-family: Gotham; margin-right: 20px;" id="real-name"></span><br><span id="bio"></span></h6>
 			</div>
 		</div>
 	</div>
@@ -566,19 +566,31 @@
 	<script type="text/javascript" src="../functions.js"></script>
 	<script>
 
-		const nick = getUserNickname(web3.eth.defaultAccount);
+		getUserNickname(web3.eth.defaultAccount, (nick) => {
 
-		alert(nick);
+            $("#nick-name").html( nick );
 
-		const profile = getUserProfile( nick );
-		$("#nick-name").html( nick );
-		$("#real-name").html(profile.realName);
-		$("#bio").html(profile.bio);
-		document.querySelector("#avatar").setAttribute("src", profile.ipfsLink);
-		document.querySelector("#followers-count").innerText = countUserFollowers( nick ) + " подписчиков";
-		document.querySelector("#following-count").innerText = countUserFollowings( nick ) + " подписок";
-		document.querySelector("#wall-count").innerText = countUserPosts( nick ) + " постов";
-		/*const posts = loadPosts();
+            getUserProfile( nick, (profile) => {
+                document.querySelector("#real-name").innerText = profile["realName"];
+                document.querySelector("#bio").innerText = profile["bio"];
+                document.querySelector("#avatar").setAttribute("src", "https://ipfs.io/ipfs/" + profile.ipfsLink);
+			} );
+
+            countUserFollowers( nick, (result) => {
+                document.querySelector("#followers-count").innerText = result + " подписчиков";
+            } );
+
+            countUserFollowings( nick, (result) => {
+                document.querySelector("#following-count").innerText = result + " подписок";
+            } );
+
+            countUserPosts( nick, (result) => {
+                document.querySelector("#wall-count").innerText = result + " постов";
+            } );
+
+
+        });
+	/*const posts = loadPosts();
 		for (let post of posts) {
 		}*/
 	</script>

@@ -44,61 +44,61 @@ Enstagrm.getUserNickname(web3.eth.defaultAccount, (err, res)=>{
 
 
 
-function getUserProfile(nickname) {
+function getUserProfile(nickname, callback) {
     Enstagrm.getUserProfile(nickname, (err, res) => {
         if (err) {
             console.log(err);
         } else {
             console.log(res);
-            return {
+            callback( {
                 "realName": web3.toAscii(res[0]),
                 "bio": res[1],
                 "ipfsLink": res[2]
-            }
+            });
         }
     });
 }
 
-function countUserFollowers(nickname) {
+function countUserFollowers(nickname, callback) {
     Enstagrm.countUserFollowers(nickname, (err, res) => {
         if (err) {
             console.log(err);
         } else {
             console.log(res);
-            return(res.c);
+            callback(res.c);
         }
     });
 }
 
-function countUserFollowings(nickname) {
+function countUserFollowings(nickname, callback) {
     Enstagrm.countUserFollowings(nickname, (err, res) => {
         if (err) {
             console.log(err);
         } else {
             console.log(res);
-            return(res.c);
+            callback(res.c);
         }
     });
 }
 
-function countUserPosts(nickname) {
+function countUserPosts(nickname, callback) {
     Enstagrm.countUserPosts(nickname, (err, res) => {
         if (err) {
             console.log(err);
         } else {
             console.log(res);
-            return(res.c);
+            callback(res.c);
         }
     });
 }
 
-function getUserNickname(address) {
+function getUserNickname(address, callback) {
     Enstagrm.getUserNickname(address, (err, res) => {
         if (err) {
             console.log(err);
         } else {
             console.log(web3.toAscii(res));
-            return (web3.toAscii(res));
+            callback(web3.toAscii(res));
         }
     });
 }
