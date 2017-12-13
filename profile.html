@@ -31,9 +31,9 @@
             $("#real-name").html(profile.realName);
             $("#bio").html(profile.bio);
             document.querySelector("#avatar").setAttribute("src", profile.ipfsLink);
-            document.querySelector("#followers-count").innerText = countUserFollowers( nick );
-            document.querySelector("#following-count").innerText = countUserFollowings( nick );
-            document.querySelector("#wall-count").innerText = countUserPosts( nick );
+            document.querySelector("#followers-count").innerText = countUserFollowers( nick ) + " подписчиков";
+            document.querySelector("#following-count").innerText = countUserFollowings( nick ) + " подписок";
+            document.querySelector("#wall-count").innerText = countUserPosts( nick ) + " постов";
             /*const posts = loadPosts();
             for (let post of posts) {
             }*/
