@@ -12,36 +12,9 @@
 	<!-- Bootstrap core CSS -->
 	<link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="bootstrap/font-awesome/css/font-awesome.min.css">
-<<<<<<< HEAD
+
 	<!-- Custom styles for this template -->
 	<link href="bootstrap/css/style.css" rel="stylesheet">
-
-
-	<script src="../web3.js"></script>
-	<script src="../jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="../functions.js"></script>
-
-	<script>
-        document.addEventListener('DOMContentLoaded', function () => {
-
-        	alert("loaded");
-
-            const nick = getUserNickname(web3.eth.defaultAccount);
-
-            const profile = getUserProfile( nick );
-            $("#nick-name").html( nick );
-            $("#real-name").html(profile.realName);
-            $("#bio").html(profile.bio);
-            document.querySelector("#avatar").setAttribute("src", profile.ipfsLink);
-            document.querySelector("#followers-count").innerText = countUserFollowers( nick ) + " подписчиков";
-            document.querySelector("#following-count").innerText = countUserFollowings( nick ) + " подписок";
-            document.querySelector("#wall-count").innerText = countUserPosts( nick ) + " постов";
-            /*const posts = loadPosts();
-            for (let post of posts) {
-            }*/
-        }
-	</script>
-
 
 </head>
 <body>
@@ -198,7 +171,7 @@
 			<!-- Modal -->
 			<div id="myModalAddPhoto" class="modal fade" role="dialog">
 				<div class="modal-dialog modal-lg">
-=======
+
     <!-- Custom styles for this template -->
     <link href="bootstrap/css/style.css" rel="stylesheet">
     
@@ -382,7 +355,6 @@
 				<!-- Modal -->
 				<div id="myModalAddPhoto" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-lg">
->>>>>>> b6ad5ffaac6afb4ec8f709ac6cc7434c91ee7f31
 
 					<!-- Modal content-->
 					<div class="modal-content">
@@ -465,7 +437,6 @@
 					</div>
 					<button class="dir" style="top: 50%; right: -40px;"><i class="fa fa-angle-right fa-3x" aria-hidden="true"></i></button>
 				</div>
-<<<<<<< HEAD
 			</div>
 		</div>
 	</div>
@@ -589,10 +560,31 @@
 		}); 	
 	});
   </script>
-	  
+
+	<script src="../web3.js"></script>
+	<script src="../jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="../functions.js"></script>
+	<script>
+
+		const nick = getUserNickname(web3.eth.defaultAccount);
+
+		alert(nick);
+
+		const profile = getUserProfile( nick );
+		$("#nick-name").html( nick );
+		$("#real-name").html(profile.realName);
+		$("#bio").html(profile.bio);
+		document.querySelector("#avatar").setAttribute("src", profile.ipfsLink);
+		document.querySelector("#followers-count").innerText = countUserFollowers( nick ) + " подписчиков";
+		document.querySelector("#following-count").innerText = countUserFollowings( nick ) + " подписок";
+		document.querySelector("#wall-count").innerText = countUserPosts( nick ) + " постов";
+		/*const posts = loadPosts();
+		for (let post of posts) {
+		}*/
+	</script>
+
 	   	      
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
   </body>
->>>>>>> b6ad5ffaac6afb4ec8f709ac6cc7434c91ee7f31
 </html>
