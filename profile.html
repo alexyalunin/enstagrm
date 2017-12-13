@@ -16,6 +16,30 @@
     <link href="bootstrap/css/style.css" rel="stylesheet">
     
 
+	<script>
+		document.onload = () => {
+
+			const profile = getUserProfile( nick );
+
+			$("#nick-name").html( nick );
+			$("#real-name").html(profile.realName);
+			$("#bio").html(profile.bio);
+
+			document.querySelector("#avatar").setAttribute("src", profile.ipfsLink);
+
+			document.querySelector("#followers-count").innerText = countUserFollowers( nick );
+			document.querySelector("#following-count").innerText = countUserFollowings( nick );
+			document.querySelector("#wall-count").innerText = countUserPosts( nick );
+
+			/*const posts = loadPosts();
+
+			for (let post of posts) {
+			}*/
+		}
+
+	</script>
+
+
   </head>
   <body>
 	 
@@ -23,7 +47,7 @@
 		 <div class="container">
 			 
 			 
-			 	<a class="navbar-brand " href="#"><img src="bootstrap/images/logo.png"></a>
+			 	<a class="navbar-brand" href="#"><img src="bootstrap/images/logo.png"></a>
 			 			 
 			 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 			 	<span class="navbar-toggler-icon"></span>
@@ -60,17 +84,17 @@
 	 	<div class="row justify-content-center">
 	 			<div class="personal-info col-12 col-sm-10 col-auto  ">
 	 				<div class="col-12 col-sm-4 " style="display: inline-block; float: left">
-		 				<img src="bootstrap/images/meg.jpg" class="photo mx-auto d-block">
+		 				<img src="" id="avatar" alt="no photo" class="photo mx-auto d-block">
 	      			</div>
 		  			<div class="col-12  col-sm-8 info" style="display: inline-block; float: left">
 		  				
-		  					<div class="col-8  username"><h2 >Megan Fox</h2></div>
+		  					<div class="col-8  username"><h2 id="nick-name"></h2></div>
 			   				<ul class="col-12 counters">
-			   					<li class="col-4">127 публикаций</li>
-			   					<li class="col-4">127 подписчиков</li>
-			   					<li class="col-4">127 подписок</li>
+			   					<li class="col-4" id="wall-count"></li>
+			   					<li class="col-4" id="followers-count"></li>
+			   					<li class="col-4" id="following-count"></li>
 			   				</ul>
-			   				<h6 class="col-12 description"><span style="font-family: Gotham; margin-right: 20px;">Foxy </span> HSE student, blockchain-developer</h6>
+			   				<h6 class="col-12 description"><span style="font-family: Gotham; margin-right: 20px;" id="real-name"></span><span id="bio"></span></h6>
 	       			</div>
 	 			</div>
 	      </div>
@@ -284,7 +308,6 @@
 			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
 		input.trigger('fileselect', [label]);
 		});
-
 		$('.btn-file :file').on('fileselect', function(event, label) {
 		    
 		    var input = $(this).parents('.input-group').find(':text'),
@@ -308,12 +331,11 @@
 		        reader.readAsDataURL(input.files[0]);
 		    }
 		}
-
 		$("#imgInp").change(function(){
 		    readURL(this);
 		}); 	
 	});
-		  </script>
+  </script>
 	  
 	   	      
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
