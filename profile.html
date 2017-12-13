@@ -22,7 +22,9 @@
 	<script type="text/javascript" src="../functions.js"></script>
 
 	<script>
-        document.onload = () => {
+        document.addEventListener('DOMContentLoaded', function () => {
+
+        	alert("loaded");
 
             const nick = getUserNickname(web3.eth.defaultAccount);
 
