@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" type="text/css" href="main.css">
+        <script src="web3.js"></script>
+
+        <script src="https://wzrd.in/standalone/buffer"></script>
+        <script src="https://unpkg.com/ipfs-api@9.0.0/dist/index.js"
+                integrity="sha384-5bXRcW9kyxxnSMbOoHzraqa7Z0PQWIao+cgeg327zit1hz5LZCEbIMx/LWKPReuB"
+                crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <img id="loader" src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif">
+
+            <a id="defaultAccount">...</a>
+            <br>
+            <a id="nickname">...</a>
+
+            <h2>Get functions</h2>
+
+            <button id="countUsers">countUsers</button>
+            <a id="numberOfUsers">...</a>
+            <br><br>
+
+            <input id="addressInput" type="text" placeholder="Enter address">
+            <br>
+
+            <button id="getUserNicknameButton">getUserNickname</button>
+            <a id="getUserNickname">...</a>
+            <br>
+
+            <button id="addressIsRegistredButton">addressIsRegistred</button>
+            <a id="addressIsRegistred">...</a>
+            <br>
+            <br>
+
+
+            <input id="nicknameInput" type="text" placeholder="Enter nickname">
+            <br>
+
+            <button id="nicknameIsAvailableButton">nicknameIsAvailable</button>
+            <a id="nicknameIsAvailable">...</a>
+            <br>
+
+            <button id="getUserProfileButton">getUserProfile</button>
+            <a id="getUserProfile">...</a>
+            <br>
+
+
+
+            <button id="getUserPostIdsButton">getUserPostIds</button>
+            <a id="getUserPostIds">...</a>
+            <br>
+
+            <button id="getUserFollowersButton">getUserFollowers</button>
+            <a id="getUserFollowers">...</a>
+            <br>
+
+            <button id="getUserFollowingsButton">getUserFollowings</button>
+            <a id="getUserFollowings">...</a>
+            <br>
+
+            <button id="countUserPostsButton">countUserPosts</button>
+            <a id="countUserPosts">...</a>
+            <br>
+
+            <button id="countUserFollowersButton">countUserFollowers</button>
+            <a id="countUserFollowers">...</a>
+            <br>
+
+            <button id="countUserFollowingsButton">countUserFollowings</button>
+            <a id="countUserFollowings">...</a>
+            <br>
+
+
+            <input id="postIdInput" type="text" placeholder="Enter postID">
+            <br>
+            <button id="getPostButton">getPost</button>
+            <a id="getPost">...</a>
+            <br>
+
+            <button id="getPostLikesButton">getPostLikes</button>
+            <a id="getPostLikes">...</a>
+            <br>
+
+            <button id="getPostCommentsButton">getPostComments</button>
+            <a id="getPostComments">...</a>
+            <br>
+
+
+            <button id="getUserPostsButton">getUserPosts</button>
+            <a id="getUserPosts">...</a>
+            <br>
+
+
+
+
+
+
+
+            <h2>Set functions</h2>
+
+            <button id="registerButton">Register</button>
+            <br><br>
+
+            <input id="fillProfileRealNameInput" type="text" placeholder="Enter real name">
+            <input id="fillProfileBioInput" type="text" placeholder="Enter bio">
+            <input id="fillProfileIPFSLinkInput" type="text" placeholder="Enter ipfs link">
+            <button id="fillProfileButton">fillProfile</button>
+            <a id="fillProfile">...</a>
+            <br>
+
+
+            <button id="followButton">follow</button>
+            <a id="follow">...</a>
+            <br>
+
+            <button id="unfollowButton">unfollow</button>
+            <a id="unfollow">...</a>
+            <br>
+
+
+            <button id="likeButton">like</button>
+            <a id="like">...</a>
+            <br>
+
+            <input id="commentText" type="text" placeholder="Enter text">
+            <button id="commentButton">comment</button>
+            <a id="comment">...</a>
+            <br>
+
+
+
+            <h2>Add post with IPFS</h2>
+
+            <input type="file" name="photo" id="photo">
+            <input id="postText" type="text" placeholder="Enter text">
+            <button id="addPostButton">addPost</button>
+            <a id="addPost">...</a>
+            <br>
+
+
+        </div>
+
+        <script src="jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="functions.js"></script>
+
+    </body>
+</html>
