@@ -37,7 +37,7 @@ i:hover{
   object-fit: cover;
   border: 2px solid #efefef;
 }
-.info, .username, {
+.info, .username {
   display: inline-block!important;
 }
 .username{
@@ -46,7 +46,7 @@ i:hover{
 }
 .description{
   font-family: Proxima-Nova-Thin;
-  margin-top: 45px;
+  margin-top: 55px;
 }
 
 .counters{

@@ -26,17 +26,23 @@
 //    router.addRoute("/inn", noop);
 
     try {
-        const auth = web3.eth.defaultAccount;
-        if (auth === undefined)
+        if (userAddress === undefined)
             location = "login.html";
         else
-            Enstagrm.addressIsRegistred(auth, (err, res) => {
+            Enstagrm.addressIsRegistred(userAddress, (err, res) => {
                 if (err) {
                     console.log(err);
                     location = "login.html";
                 } else {
                     if (res == true) {
-                        location = "profile.html";
+                        Enstagrm.getUserNickname(userAddress, (err, res) => {
+                            if (err) {
+                                console.log(err);
+                                location = "login.html";
+                            } else {
+                                location = "profile.html?" + web3.toAscii(res);
+                            }
+                        });
                     } else {
                         location = "login.html";
                     }

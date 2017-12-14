@@ -31,6 +31,9 @@
 
 		<div class="collapse navbar-collapse " style="flex-grow: 0"id="navbarCollapse">
 			<ul class="navbar-nav ">
+				<li>
+					<img id="loader" src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif" style="display: none;" height="50" width="50">
+				</li>
 				<li class="nav-item ">
 					<a class="nav-link" href="#"><i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#myModalAddPhoto"></i></a>
 				</li>
@@ -60,18 +63,19 @@
 	<div class="row justify-content-center">
 		<div class="personal-info col-12 col-sm-10 col-auto  ">
 			<div class="col-12 col-sm-4 " style="display: inline-block; float: left">
-				<img src="" id="avatar" alt="no photo" class="photo mx-auto d-block">
+				<img src="" id="avatar" alt="" class="photo mx-auto d-block">
 			</div>
 			<div class="col-12  col-sm-8 info" style="display: inline-block; float: left">
 
-				<div class="col-8  username"><h2 id="nick-name"></h2></div>
+				<div id="divNicknameAndButton" class="col-8  username">
+					<h2 id="nick-name" style="display: inline-block"></h2>
+				</div>
 				<ul class="col-12 counters">
 					<li class="col-4" id="wall-count"></li>
 					<li class="col-4" id="followers-count"></li>
 					<li class="col-4" id="following-count"></li>
 				</ul>
 				<h6 class="col-12 description"><span style="font-family: Gotham; margin-right: 20px;" id="real-name"></span>
-
 					<span id="bio"></span></h6>
 			</div>
 		</div>
@@ -89,36 +93,36 @@
 					</div>
 				</div>
 			</a>
-			<a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal">
-				<div class="wrap" style="background: url('http://ipfs.io/ipfs/QmTbP7T9Fc27BgN9n6xTCywDb9c3auy4KUjPGrP9KJxiye') no-repeat center center; background-size: contain;">
-					<div class="hover col-12">
-						<div class="col-10 offset-1">
-							<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>
-							<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>
-						</div>
-					</div>
-				</div>
-			</a>
-			<a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal">
-				<div class="wrap" style="background: url('http://ipfs.io/ipfs/QmdzXCNtC8TxJydrGmHs3cGCG676uxQKj8kKrmyXU3Xtwp') no-repeat center center; background-size: contain;">
-					<div class="hover col-12">
-						<div class="col-10 offset-1">
-							<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>
-							<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>
-						</div>
-					</div>
-				</div>
-			</a>
-			<a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal">
-				<div class="wrap" style="background: url('http://ipfs.io/ipfs/QmdzXCNtC8TxJydrGmHs3cGCG676uxQKj8kKrmyXU3Xtwp') no-repeat center center; background-size: contain;">
-					<div class="hover col-12">
-						<div class="col-10 offset-1">
-							<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>
-							<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>
-						</div>
-					</div>
-				</div>
-			</a>
+			<!--<a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal"  id = "2">-->
+				<!--<div class="wrap" style="background: url('http://ipfs.io/ipfs/QmTbP7T9Fc27BgN9n6xTCywDb9c3auy4KUjPGrP9KJxiye') no-repeat center center; background-size: contain;">-->
+					<!--<div class="hover col-12">-->
+						<!--<div class="col-10 offset-1">-->
+							<!--<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>-->
+							<!--<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</a>-->
+			<!--<a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal" id = "1">-->
+				<!--<div class="wrap" style="background: url('http://ipfs.io/ipfs/QmdzXCNtC8TxJydrGmHs3cGCG676uxQKj8kKrmyXU3Xtwp') no-repeat center center; background-size: contain;">-->
+					<!--<div class="hover col-12">-->
+						<!--<div class="col-10 offset-1">-->
+							<!--<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>-->
+							<!--<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</a>-->
+			<!--<a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal">-->
+				<!--<div class="wrap" style="background: url('http://ipfs.io/ipfs/QmdzXCNtC8TxJydrGmHs3cGCG676uxQKj8kKrmyXU3Xtwp') no-repeat center center; background-size: contain;">-->
+					<!--<div class="hover col-12">-->
+						<!--<div class="col-10 offset-1">-->
+							<!--<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>-->
+							<!--<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</a>-->
 		</div>
 
 			<!-- Modal -->
@@ -206,7 +210,7 @@
 					</div>
 					<button class="dir" style="top: 50%; right: -40px;"><i class="fa fa-angle-right fa-3x" aria-hidden="true"></i></button>
 				</div>
-			</div>
+		</div>
 
 	</div>
 </div>
@@ -264,7 +268,6 @@
 </script>
 
 
-
 <script src="../web3.js"></script>
 <script src="../jquery-3.2.1.min.js"></script>
 <script src="https://wzrd.in/standalone/buffer"></script>
@@ -274,52 +277,117 @@
 <script type="text/javascript" src="../functions.js"></script>
 
 <script>
-    var arr = [];
-    getUserNickname(web3.eth.defaultAccount, (nick) => {
+    var url = location.href;
+    var urlNickname = url.substring(url.indexOf("?")+1);
+    var userNicknameGlobal = "";
+    if (url == urlNickname) {
+        location = "index.html";
+	}
 
-        $("#nick-name").html( nick );
+    try {
+        if (userAddress === undefined) {
+            location = "index.html";
+        } else {
+            addressIsRegistred(userAddress, (res) => {
+				if (res == true) {
+					getUserNickname(userAddress, (userNickname) => {
+                        userNicknameGlobal = userNickname;
+						if (urlNickname != userNickname) {
+                            $("#nick-name").html(urlNickname);
 
-        getUserProfile( nick, (profile) => {
-            $("#real-name").html(profile["realName"]);
-            $("#bio").html(profile["bio"]);
-            $("#avatar").attr("src", "http://ipfs.io/ipfs/" + profile.ipfsLink);
-        });
+                            isFollowing(userNickname, urlNickname, (res) => {
+                                if (res == true) {
+                                    $("#divNicknameAndButton").append('<button id="unfollowButton">Отписаться</button>');
 
-        countUserFollowers( nick, (result) => {
-            $("#followers-count").html('<strong>' + result + '</strong>' + " подписчиков");
-        });
+                                    $("#unfollowButton").click(function() {
+                                        $("#loader").show();
+                                        Enstagrm.unfollow(urlNickname, {from: web3.eth.defaultAccount, gas:3000000}, (err, res) => {
+                                            if (err) {
+                                                console.log(err);
+                                            } else {
+                                                console.log(res);
+                                                $("#unfollow").html("ok");
+                                            }
+                                            $("#loader").hide();
+                                        });
+                                    });
 
-        countUserFollowings( nick, (result) => {
-            $("#following-count").html('<strong>' + result + '</strong>' + " подписок");
-        });
+								} else {
 
-        countUserPosts( nick, (result) => {
-            $("#wall-count").html('<strong>' + result + '</strong>' + " публикаций");
-        });
+                                    $("#divNicknameAndButton").append('<button id="followButton">Подписаться</button>');
 
-        getUserPosts( nick, (result) => {
-            console.log(result);
-			result.forEach(function (item) {
-				$("#profile_photos").append(
-				    '<a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal" id="' + item["postId"]+ '">\n' +
-                    '\t\t\t\t<div class="wrap" style="background: url(\'http://ipfs.io/ipfs/' + item["urlPhoto"] + '\') no-repeat center center; background-size: contain;">\n' +
-                    '\t\t\t\t\t<div class="hover col-12">\n' +
-                    '\t\t\t\t\t\t<div class="col-10 offset-1">\n' +
-                    '\t\t\t\t\t\t\t<p class="hover_info">' + item["likesCount"] + '<i class="fa fa-circle-thin" aria-hidden="true"></i></p>\n' +
-                    '\t\t\t\t\t\t\t<p class="hover_info">' + item["commentsCount"] + '<i class="fa fa-comment-o" aria-hidden="true"></i></p>\n' +
-                    '\t\t\t\t\t\t</div>\n' +
-                    '\t\t\t\t\t</div>\n' +
-                    '\t\t\t\t</div>\n' +
-                    '\t\t\t</a>'
-				);
+                                    $("#followButton").click(function() {
+                                        $("#loader").show();
+                                        Enstagrm.follow(urlNickname, {from: web3.eth.defaultAccount, gas:3000000}, (err, res) => {
+                                            if (err) {
+                                                console.log(err);
+                                            } else {
+                                                console.log(res);
+                                            }
+                                            $("#loader").hide();
+                                        });
+                                    });
+                                }
+                            });
+						} else {
+                            $("#nick-name").html(urlNickname + " (you)");
+						}
+
+						getUserProfile(urlNickname, (profile) => {
+							$("#real-name").html(profile["realName"]);
+							$("#bio").html(profile["bio"]);
+							if (profile.ipfsLink == "") {
+								$("#avatar").attr("src", "bootstrap/images/altphoto.png");
+							} else {
+								$("#avatar").attr("src", "http://ipfs.io/ipfs/" + profile.ipfsLink);
+							}
+						});
+
+						countUserFollowers(urlNickname, (result) => {
+							$("#followers-count").html('<strong>' + result + '</strong>' + " подписчиков");
+						});
+
+						countUserFollowings(urlNickname, (result) => {
+							$("#following-count").html('<strong>' + result + '</strong>' + " подписок");
+						});
+
+						countUserPosts(urlNickname, (result) => {
+							$("#wall-count").html('<strong>' + result + '</strong>' + " публикаций");
+						});
+
+						getUserPosts(urlNickname, (result) => {
+							console.log(result);
+							result.forEach(function (item) {
+								$("#profile_photos").append(
+									'<a class="single_profile_photo" href="#' + item["postId"] + '" data-toggle="modal" data-target="#myModal" id="' + item['postId'] + '">\n' +
+									'\t\t\t\t<div class="wrap" style="background: url(\'http://ipfs.io/ipfs/' + item["urlPhoto"] + '\') no-repeat center center; background-size: contain;">\n' +
+									'\t\t\t\t\t<div class="hover col-12">\n' +
+									'\t\t\t\t\t\t<div class="col-10 offset-1">\n' +
+									'\t\t\t\t\t\t\t<p class="hover_info">' + item["likesCount"] + '<i class="fa fa-circle-thin" aria-hidden="true"></i></p>\n' +
+									'\t\t\t\t\t\t\t<p class="hover_info">' + item["commentsCount"] + '<i class="fa fa-comment-o" aria-hidden="true"></i></p>\n' +
+									'\t\t\t\t\t\t</div>\n' +
+									'\t\t\t\t\t</div>\n' +
+									'\t\t\t\t</div>\n' +
+									'\t\t\t</a>'
+								);
+							});
+
+							$(".single_profile_photo").click(function () {
+								var id = $(this).attr('id');
+								console.log(id);
+							});
+						});
+					});
+
+				} else {
+					location = "index.html";
+				}
             });
-        });
+        }
+    } catch (e) {
+        location = "index.html";
+    }
 
-
-    });
-    /*const posts = loadPosts();
-        for (let post of posts) {
-        }*/
 </script>
 
 

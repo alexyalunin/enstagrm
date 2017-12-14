@@ -2,13 +2,39 @@
 if (typeof web3 !== 'undefined') {
     web3 = new Web3(web3.currentProvider);
 } else {
-    web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+    web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
 }
 
 web3.eth.defaultAccount = web3.eth.accounts[0];
-const EnstagrmContract = web3.eth.contract([{"constant":true,"inputs":[],"name":"getUsers","outputs":[{"name":"","type":"bytes16[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_address","type":"address"}],"name":"getUserNickname","outputs":[{"name":"","type":"bytes16"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_nickname","type":"bytes16"}],"name":"register","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"uint32"}],"name":"countPostLikes","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_id","type":"uint32"},{"name":"_text","type":"string"}],"name":"comment","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"countUserPosts","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_postId","type":"uint32"},{"name":"index","type":"uint256"}],"name":"getPostComment","outputs":[{"name":"","type":"bytes16"},{"name":"","type":"string"},{"name":"","type":"uint64"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"countUserFollowers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"getUserProfile","outputs":[{"name":"","type":"bytes32"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_id","type":"uint32"}],"name":"like","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"getUserFollowers","outputs":[{"name":"","type":"bytes16[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"getUserPostIds","outputs":[{"name":"","type":"uint32[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_address","type":"address"}],"name":"addressIsRegistred","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_urlPhoto","type":"string"},{"name":"_text","type":"string"}],"name":"addPost","outputs":[{"name":"","type":"uint32"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"uint32"}],"name":"getPostLikes","outputs":[{"name":"","type":"bytes16[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"countUserFollowings","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_postId","type":"uint32"}],"name":"countPostCommentsLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_nickname","type":"bytes16"}],"name":"nicknameIsAvailable","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_realName","type":"bytes32"},{"name":"_bio","type":"string"},{"name":"_ipfsLink","type":"string"}],"name":"fillProfile","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"getUserFollowings","outputs":[{"name":"","type":"bytes16[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"uint32"}],"name":"getPost","outputs":[{"name":"","type":"bytes16"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"uint64"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"follow","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"unfollow","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"countUsers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"userAddress","type":"address"},{"indexed":false,"name":"userNickname","type":"bytes32"}],"name":"UserRegistred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"userNickname","type":"bytes16"},{"indexed":false,"name":"realName","type":"bytes32"},{"indexed":false,"name":"bio","type":"string"},{"indexed":false,"name":"urlProfileImage","type":"string"}],"name":"ProfileUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"follower","type":"bytes16"},{"indexed":false,"name":"following","type":"bytes16"}],"name":"SubscriptionHappened","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"follower","type":"bytes16"},{"indexed":false,"name":"unfollowing","type":"bytes16"}],"name":"UnsubscribingHappened","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"postId","type":"uint32"},{"indexed":false,"name":"creator","type":"bytes16"},{"indexed":false,"name":"urlPhoto","type":"string"},{"indexed":false,"name":"text","type":"string"},{"indexed":false,"name":"timestamp","type":"uint64"}],"name":"PostAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"postId","type":"uint32"},{"indexed":false,"name":"creator","type":"bytes16"},{"indexed":false,"name":"timestamp","type":"uint64"}],"name":"PostLiked","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"postId","type":"uint32"},{"indexed":false,"name":"creator","type":"bytes16"},{"indexed":false,"name":"text","type":"string"},{"indexed":false,"name":"timestamp","type":"uint64"}],"name":"PostCommented","type":"event"}]);
-const Enstagrm = EnstagrmContract.at('0x6391b2b6266fc6290799ae76ace27a117114ef63');
+const userAddress = web3.eth.defaultAccount;
+const EnstagrmContract = web3.eth.contract([ { "constant": true, "inputs": [], "name": "getUsers", "outputs": [ { "name": "", "type": "bytes16[]" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_address", "type": "address" } ], "name": "getUserNickname", "outputs": [ { "name": "", "type": "bytes16" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_nickname", "type": "bytes16" } ], "name": "register", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "_id", "type": "uint32" } ], "name": "countPostLikes", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_id", "type": "uint32" }, { "name": "_text", "type": "string" } ], "name": "comment", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "_firstUser", "type": "bytes16" }, { "name": "_secondUser", "type": "bytes16" } ], "name": "isFollowing", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "countUserPosts", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_postId", "type": "uint32" }, { "name": "index", "type": "uint256" } ], "name": "getPostComment", "outputs": [ { "name": "", "type": "bytes16" }, { "name": "", "type": "string" }, { "name": "", "type": "uint64" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "countUserFollowers", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "getUserProfile", "outputs": [ { "name": "", "type": "bytes32" }, { "name": "", "type": "string" }, { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_id", "type": "uint32" } ], "name": "like", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "getUserFollowers", "outputs": [ { "name": "", "type": "bytes16[]" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "getUserPostIds", "outputs": [ { "name": "", "type": "uint32[]" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_address", "type": "address" } ], "name": "addressIsRegistred", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_urlPhoto", "type": "string" }, { "name": "_text", "type": "string" } ], "name": "addPost", "outputs": [ { "name": "", "type": "uint32" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "_id", "type": "uint32" } ], "name": "getPostLikes", "outputs": [ { "name": "", "type": "bytes16[]" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "countUserFollowings", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_postId", "type": "uint32" } ], "name": "countPostCommentsLength", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_nickname", "type": "bytes16" } ], "name": "nicknameIsAvailable", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_realName", "type": "bytes32" }, { "name": "_bio", "type": "string" }, { "name": "_ipfsLink", "type": "string" } ], "name": "fillProfile", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "getUserFollowings", "outputs": [ { "name": "", "type": "bytes16[]" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_id", "type": "uint32" } ], "name": "getPost", "outputs": [ { "name": "", "type": "bytes16" }, { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "uint64" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "follow", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "unfollow", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "countUsers", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "userAddress", "type": "address" }, { "indexed": false, "name": "userNickname", "type": "bytes32" } ], "name": "UserRegistred", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "userNickname", "type": "bytes16" }, { "indexed": false, "name": "realName", "type": "bytes32" }, { "indexed": false, "name": "bio", "type": "string" }, { "indexed": false, "name": "urlProfileImage", "type": "string" } ], "name": "ProfileUpdated", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "follower", "type": "bytes16" }, { "indexed": false, "name": "following", "type": "bytes16" } ], "name": "SubscriptionHappened", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "follower", "type": "bytes16" }, { "indexed": false, "name": "unfollowing", "type": "bytes16" } ], "name": "UnsubscribingHappened", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "postId", "type": "uint32" }, { "indexed": false, "name": "creator", "type": "bytes16" }, { "indexed": false, "name": "urlPhoto", "type": "string" }, { "indexed": false, "name": "text", "type": "string" }, { "indexed": false, "name": "timestamp", "type": "uint64" } ], "name": "PostAdded", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "postId", "type": "uint32" }, { "indexed": false, "name": "creator", "type": "bytes16" }, { "indexed": false, "name": "timestamp", "type": "uint64" } ], "name": "PostLiked", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "postId", "type": "uint32" }, { "indexed": false, "name": "creator", "type": "bytes16" }, { "indexed": false, "name": "text", "type": "string" }, { "indexed": false, "name": "timestamp", "type": "uint64" } ], "name": "PostCommented", "type": "event" }]);
+const Enstagrm = EnstagrmContract.at('0x8f0483125fcb9aaaefa9209d8e9d7b9c8b9fb90f');
 
+
+function addressIsRegistred(address, callback) {
+    Enstagrm.addressIsRegistred(address, (err, res) => {
+        if (err) {
+            console.log(err);
+            location="index.html";
+        } else {
+            if (res == true){
+                callback(res);
+            } else {
+                location="index.html";
+            }
+        }
+    });
+}
+
+function isFollowing(nickname1, nickname2, callback) {
+    Enstagrm.isFollowing(nickname1, nickname2, (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            callback(res);
+        }
+    });
+}
 
 
 function getUserProfile(nickname, callback) {
@@ -63,9 +89,10 @@ function getUserNickname(address, callback) {
     Enstagrm.getUserNickname(address, (err, res) => {
         if (err) {
             console.log(err);
+            location = "login.html";
         } else {
             console.log(web3.toAscii(res));
-            callback(web3.toAscii(res));
+            callback(web3.toAscii(res).replace(/\0/g, ''));
         }
     });
 }
@@ -124,6 +151,35 @@ function getUserPosts(nickname, callback) {
     });
 };
 
+
+
+$("#followButton").click(function() {
+    $("#loader").show();
+    Enstagrm.follow($("#nicknameInput").val(), {from: web3.eth.defaultAccount, gas:3000000}, (err, res) => {
+        if (err) {
+            console.log(err);
+            $("#follow").html("error");
+        } else {
+            console.log(res);
+            $("#follow").html("ok");
+        }
+        $("#loader").hide();
+    });
+});
+
+$("#unfollowButton").click(function() {
+    $("#loader").show();
+    Enstagrm.unfollow($("#nicknameInput").val(), {from: web3.eth.defaultAccount, gas:3000000}, (err, res) => {
+        if (err) {
+            console.log(err);
+            $("#unfollow").html("error");
+        } else {
+            console.log(res);
+            $("#unfollow").html("ok");
+        }
+        $("#loader").hide();
+    });
+});
 
 
 $("#fillProfileButton").click(function() {
@@ -462,48 +518,20 @@ $("#getPostCommentsButton").click(function() {
 $("#registerButton").click(function(event) {
     event.preventDefault();
     $("#loader").show();
-    console.log("123");
-    Enstagrm.register($("#inputLogin").val(), {from: web3.eth.defaultAccount, gas:3000000}, (err, res) => {
+    var nick = $("#inputLogin").val();
+    Enstagrm.register(nick, {from: web3.eth.defaultAccount, gas:3000000}, (err, res) => {
         if (err) {
             console.log(err);
         } else {
             console.log(res);
-            location = "profile.html";
+            $("#loader").hide();
+            location = "profile.html?" + nick;
         }
-        $("#loader").hide();
     });
 });
 
 
 
-
-$("#followButton").click(function() {
-    $("#loader").show();
-    Enstagrm.follow($("#nicknameInput").val(), {from: web3.eth.defaultAccount, gas:3000000}, (err, res) => {
-        if (err) {
-            console.log(err);
-            $("#follow").html("error");
-        } else {
-            console.log(res);
-            $("#follow").html("ok");
-        }
-        $("#loader").hide();
-    });
-});
-
-$("#unfollowButton").click(function() {
-    $("#loader").show();
-    Enstagrm.unfollow($("#nicknameInput").val(), {from: web3.eth.defaultAccount, gas:3000000}, (err, res) => {
-        if (err) {
-            console.log(err);
-            $("#unfollow").html("error");
-        } else {
-            console.log(res);
-            $("#unfollow").html("ok");
-        }
-        $("#loader").hide();
-    });
-});
 
 
 $("#likeButton").click(function() {
@@ -533,6 +561,7 @@ $("#commentButton").click(function() {
         $("#loader").hide();
     });
 });
+
 
 
 
