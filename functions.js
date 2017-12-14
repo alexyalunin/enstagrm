@@ -5,42 +5,9 @@ if (typeof web3 !== 'undefined') {
     web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
 
-web3.eth.defaultAccount = web3.eth.accounts[8];
+web3.eth.defaultAccount = web3.eth.accounts[0];
 const EnstagrmContract = web3.eth.contract([{"constant":true,"inputs":[],"name":"getUsers","outputs":[{"name":"","type":"bytes16[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_address","type":"address"}],"name":"getUserNickname","outputs":[{"name":"","type":"bytes16"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_nickname","type":"bytes16"}],"name":"register","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"uint32"}],"name":"countPostLikes","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_id","type":"uint32"},{"name":"_text","type":"string"}],"name":"comment","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"countUserPosts","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_postId","type":"uint32"},{"name":"index","type":"uint256"}],"name":"getPostComment","outputs":[{"name":"","type":"bytes16"},{"name":"","type":"string"},{"name":"","type":"uint64"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"countUserFollowers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"getUserProfile","outputs":[{"name":"","type":"bytes32"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_id","type":"uint32"}],"name":"like","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"getUserFollowers","outputs":[{"name":"","type":"bytes16[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"getUserPostIds","outputs":[{"name":"","type":"uint32[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_address","type":"address"}],"name":"addressIsRegistred","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_urlPhoto","type":"string"},{"name":"_text","type":"string"}],"name":"addPost","outputs":[{"name":"","type":"uint32"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"uint32"}],"name":"getPostLikes","outputs":[{"name":"","type":"bytes16[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"countUserFollowings","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_postId","type":"uint32"}],"name":"countPostCommentsLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_nickname","type":"bytes16"}],"name":"nicknameIsAvailable","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_realName","type":"bytes32"},{"name":"_bio","type":"string"},{"name":"_ipfsLink","type":"string"}],"name":"fillProfile","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"getUserFollowings","outputs":[{"name":"","type":"bytes16[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"uint32"}],"name":"getPost","outputs":[{"name":"","type":"bytes16"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"uint64"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"follow","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_userNickname","type":"bytes16"}],"name":"unfollow","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"countUsers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"userAddress","type":"address"},{"indexed":false,"name":"userNickname","type":"bytes32"}],"name":"UserRegistred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"userNickname","type":"bytes16"},{"indexed":false,"name":"realName","type":"bytes32"},{"indexed":false,"name":"bio","type":"string"},{"indexed":false,"name":"urlProfileImage","type":"string"}],"name":"ProfileUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"follower","type":"bytes16"},{"indexed":false,"name":"following","type":"bytes16"}],"name":"SubscriptionHappened","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"follower","type":"bytes16"},{"indexed":false,"name":"unfollowing","type":"bytes16"}],"name":"UnsubscribingHappened","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"postId","type":"uint32"},{"indexed":false,"name":"creator","type":"bytes16"},{"indexed":false,"name":"urlPhoto","type":"string"},{"indexed":false,"name":"text","type":"string"},{"indexed":false,"name":"timestamp","type":"uint64"}],"name":"PostAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"postId","type":"uint32"},{"indexed":false,"name":"creator","type":"bytes16"},{"indexed":false,"name":"timestamp","type":"uint64"}],"name":"PostLiked","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"postId","type":"uint32"},{"indexed":false,"name":"creator","type":"bytes16"},{"indexed":false,"name":"text","type":"string"},{"indexed":false,"name":"timestamp","type":"uint64"}],"name":"PostCommented","type":"event"}]);
-const Enstagrm = EnstagrmContract.at('0xe65b8b4e14cf1022a931a809729d7c95b23073b9');
-
-//            var instructorEvent = Coursetro.instructorInfo({},'latest');
-//            instructorEvent.watch(function (err, result) {
-//                if (!err) {
-//                    if (result.blockHash != $("#instrans").html())
-//                        $("#loader").hide();
-//
-//                    $("#insTrans").html('Block hash: ' +result.blockHash);
-//                    $("#instructor").html(web3.toAscii(result.args.fName) + ' ' + web3.toAscii(result.args.lName) + ' (' + result.args.age + ' years old)');
-//                } else {
-//                    $("#loader").hide();
-//                }
-//            });
-//            Coursetro.countInstructors((err, res) => {
-//                if (res)
-//                $("#countIns").html(res.c + ' Instructors');
-//            });
-//
-//            $("#button").click(function() {
-//                $("#loader").show();
-//                Coursetro.setInstructor(web3.eth.defaultAccount, $("#age").val(), $("#fName").val(),$("#lName").val(), (err, res) => {
-//                    if (err)
-//                    $("#loader").hide();
-//                });
-//            });
-
-$("#defaultAccount").html(web3.eth.defaultAccount);
-$("#addressInput").val(web3.eth.defaultAccount);
-Enstagrm.getUserNickname(web3.eth.defaultAccount, (err, res)=>{
-    $("#nicknameInput").val(String(web3.toAscii(res)));
-    $("#nickname").html(String(web3.toAscii(res)));
-});
-
+const Enstagrm = EnstagrmContract.at('0x6391b2b6266fc6290799ae76ace27a117114ef63');
 
 
 
@@ -102,6 +69,133 @@ function getUserNickname(address, callback) {
         }
     });
 }
+
+
+function getUserPosts(nickname, callback) {
+    Enstagrm.getUserPostIds(nickname, (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            arrOfIndices = [];
+            res.forEach(function(item) {
+                arrOfIndices.push(item.c);
+            });
+            posts = [];
+            for (var i = 0, len = arrOfIndices.length; i < len; i++) {
+                (function(index) {
+                    var postId = arrOfIndices[index][0];
+                    Enstagrm.getPost(postId, (err, resultPostInfo) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            Enstagrm.countPostLikes(postId, (err, resultNumberOfLikes) => {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    Enstagrm.countPostCommentsLength(postId, (err, resultNumberOfComments) => {
+
+                                        var creator = web3.toAscii(resultPostInfo[0]);
+                                        var urlPhoto = resultPostInfo[1];
+                                        var text = resultPostInfo[2];
+                                        var timestamp = (new Date(resultPostInfo[3] * 1000)).toLocaleString();
+                                        var likes = resultNumberOfLikes.c[0];
+                                        var comments = resultNumberOfComments.c[0];
+                                        posts.push({
+                                            "postId": postId,
+                                            "creator": creator,
+                                            "urlPhoto": urlPhoto,
+                                            "text": text,
+                                            "timestamp": timestamp,
+                                            "likesCount": likes,
+                                            "commentsCount": comments
+                                        });
+                                        if (index == len-1) {
+                                            callback(posts);
+                                        }
+
+                                    });
+                                }
+                            });
+                        }
+                    });
+                })(i)
+            }
+        }
+    });
+};
+
+
+
+$("#fillProfileButton").click(function() {
+    $("#loader").show();
+
+    const reader = new FileReader();
+    reader.onloadend = function() {
+        const ipfs = window.IpfsApi('ipfs.infura.io', '5001', { protocol: 'https' }); // Connect to IPFS
+        const buf = buffer.Buffer(reader.result); // Convert data into buffer
+        ipfs.files.add(buf, (err, result) => { // Upload buffer to IPFS
+            var url = "";
+            if(err) {
+                console.error(err);
+            } else {
+                url = String(result[0].hash);
+            }
+            Enstagrm.fillProfile(
+                $("#real-name").val(),
+                $("#bio").val(),
+                url,
+                {from: web3.eth.defaultAccount, gas:3000000},
+                (err, res) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(res);
+                    }
+                    $("#loader").hide();
+                }
+            );
+        })
+    }
+    const photo = document.getElementById("input-b5");
+    reader.readAsArrayBuffer(photo.files[0]); // Read Provided File
+
+});
+
+
+
+$("#addPostButton").click(function() {
+    $("#loader").show();
+
+    const reader = new FileReader();
+    reader.onloadend = function() {
+        const ipfs = window.IpfsApi('ipfs.infura.io', '5001', { protocol: 'https' }); // Connect to IPFS
+        const buf = buffer.Buffer(reader.result); // Convert data into buffer
+        ipfs.files.add(buf, (err, result) => { // Upload buffer to IPFS
+
+            if(err) {
+                console.error(err);
+                $("#loader").hide();
+                return
+            }
+            let url = String(result[0].hash);
+
+
+            Enstagrm.addPost(url, $("#your_comments_input").val(), {from: web3.eth.defaultAccount, gas:3000000}, (err, res) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(res);
+                }
+                $("#loader").hide();
+            });
+
+
+        })
+    }
+    const photo = document.getElementById("imgInp");
+    reader.readAsArrayBuffer(photo.files[0]); // Read Provided File
+});
+
 
 
 
@@ -347,37 +441,7 @@ $("#getPostCommentsButton").click(function() {
     });
 });
 
-$("#getUserPostsButton").click(function() {
-    $("#loader").show();
-    posts = [];
-    Enstagrm.getUserPostIds($("#nicknameInput").val(), (err, res) => {
-        if (err) {
-            console.log(err);
-            $("#getUserPosts").html("error 1");
-        } else {
-            arrOfIndices = [];
-            res.forEach(function(item) {
-                arrOfIndices.push(item.c);
-            });
-            arrOfIndices.forEach(function(item) {
-                Enstagrm.getPost(item, (err, res) => {
-                    if (err) {
-                        console.log(err);
-                        $("#getUserPosts").html("error 2");
-                    } else {
-                        var creator = web3.toAscii(res[0]);
-                        var urlPhoto = res[1];
-                        var text = res[2];
-                        var timestamp = (new Date(res[3]*1000)).toLocaleString();
-                        posts.push([creator, urlPhoto, text, timestamp]);
-                    }
-                });
-            });
-        }
-        $("#loader").hide();
-    });
-    console.log(posts);
-});
+
 
 
 
@@ -411,24 +475,6 @@ $("#registerButton").click(function(event) {
 });
 
 
-$("#fillProfileButton").click(function() {
-    $("#loader").show();
-    Enstagrm.fillProfile(
-        $("#fillProfileRealNameInput").val(),
-        $("#fillProfileBioInput").val(),
-        $("#fillProfileIPFSLinkInput").val(),
-        {from: web3.eth.defaultAccount, gas:3000000},
-        (err, res) => {
-        if (err) {
-            console.log(err);
-            $("#fillProfile").html("error");
-        } else {
-            console.log(res);
-            $("#fillProfile").html("ok");
-        }
-        $("#loader").hide();
-    });
-});
 
 
 $("#followButton").click(function() {
@@ -489,39 +535,4 @@ $("#commentButton").click(function() {
 });
 
 
-
-
-$("#addPostButton").click(function() {
-    $("#loader").show();
-
-    const reader = new FileReader();
-    reader.onloadend = function() {
-        const ipfs = window.IpfsApi('ipfs.infura.io', '5001', { protocol: 'https' }); // Connect to IPFS
-        const buf = buffer.Buffer(reader.result); // Convert data into buffer
-        ipfs.files.add(buf, (err, result) => { // Upload buffer to IPFS
-
-            if(err) {
-                console.error(err);
-                return
-            }
-            let url = String(result[0].hash);
-
-
-            Enstagrm.addPost(url, $("#postText").val(), {from: web3.eth.defaultAccount, gas:3000000}, (err, res) => {
-                if (err) {
-                    console.log(err);
-                    $("#addPost").html("error");
-                } else {
-                    console.log(res);
-                    $("#addPost").html("ok");
-                }
-                $("#loader").hide();
-            });
-
-
-        })
-    }
-    const photo = document.getElementById("photo");
-    reader.readAsArrayBuffer(photo.files[0]); // Read Provided File
-});
 

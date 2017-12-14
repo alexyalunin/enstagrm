@@ -14,7 +14,6 @@
 	<link rel="stylesheet" href="bootstrap/font-awesome/css/font-awesome.min.css">
     <!-- Custom styles for this template -->
     <link href="bootstrap/css/style.css" rel="stylesheet">
-    
 
   </head>
   <body>
@@ -62,31 +61,31 @@
 	 			<div id="settings" class="col-12 col-sm-10  col-auto  ">
 		 			<div class="profile_inner col-sm-8  offset-sm-2 inbl" >
 				      	<div class="col-3 " style="display: inline-block; float: left; ">
-					  		<img src="bootstrap/images/meg.jpg" class="photo mx-auto d-block" style="width: 50px; height: 50px; float: left">
+					  		<img src="" id="avatar" class="photo mx-auto d-block" style="width: 50px; height: 50px; float: left">
 	      				</div>
 		  				<input class="col-sm-8 inbl" id="input-b5" name="input-b5[]" type="file" multiple>
 				     </div>
-	 				<form class="form-horizontal col-sm-8  offset-sm-2" >
+	 				<div class="form-horizontal col-sm-8  offset-sm-2" >
 					  <div class="form-group" >
-					    <label class="control-label col-sm-3" for="name">Name</label>
+					    <label class="control-label col-sm-3" for="real-name">Name</label>
 					    <div class="col-sm-8 inbl">
-					      <input type="text" class="form-control" id="name" placeholder="Enter name">
+							<input type="text" class="form-control" id="real-name" placeholder="Enter name">
 					    </div>
 					  </div>
 					  <div class="form-group" >
-					    <label class="control-label col-sm-3" for="about">Bio</label>
+					    <label class="control-label col-sm-3" for="bio">Bio</label>
 					    <div class="col-sm-8 inbl">
-					      <textarea style="margin: 0px" class="form-control" id="about" placeholder="Enter some info about yourself"></textarea>
+							<input type="text" class="form-control" id="bio" placeholder="Enter some info about yourself">
 					    </div>
 					  </div>
 
-					  					  
+						<img id="loader" src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif" style="display: none;">
 					  <div class="form-group"> 
 					    <div class="col-sm-offset-2 col-sm-10">
-					      <button id="fillProfile" type="submit" class="btn btn-primary">Submit</button>
+					      <button id="fillProfileButton" type="submit" class="btn btn-primary">Submit</button>
 					    </div>
 					  </div>
-					</form>
+					</div>
 	 			</div>
 	      </div>
 
@@ -110,7 +109,7 @@
 		 
 	  </script>
 	  <script>
-		 $(document).ready( function() {
+		  $(document).ready( function() {
     	$(document).on('change', '.btn-file :file', function() {
 		var input = $(this),
 			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
@@ -145,18 +144,27 @@
 		    readURL(this);
 		}); 	
 	});
-		  </script>
+	</script>
 		  
-<script>
-$(document).on('ready', function() {
-    $("#input-b5").fileinput({showCaption: false});
-});
-</script>
 
 
-	 <script>
-		 
-	 </script>
+	 <script src="../web3.js"></script>
+	 <script src="../jquery-3.2.1.min.js"></script>
+	 <script src="https://wzrd.in/standalone/buffer"></script>
+	 <script src="https://unpkg.com/ipfs-api@9.0.0/dist/index.js"
+			 integrity="sha384-5bXRcW9kyxxnSMbOoHzraqa7Z0PQWIao+cgeg327zit1hz5LZCEbIMx/LWKPReuB"
+			 crossorigin="anonymous"></script>
+	 <script type="text/javascript" src="../functions.js"></script>
+
+	<script>
+        getUserNickname(web3.eth.defaultAccount, (nick) => {
+            getUserProfile( nick, (profile) => {
+                $("#real-name").val(profile["realName"]);
+                $("#bio").val(profile["bio"])
+                $("#avatar").attr("src", "http://ipfs.io/ipfs/" + profile.ipfsLink);
+            });
+        });
+	</script>
 	  
 	   	      
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
