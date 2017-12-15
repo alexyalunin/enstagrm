@@ -36,22 +36,12 @@
 				</li>
 				<li class="nav-item ">
 					<a class="nav-link" href="#"><i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#myModalAddPhoto"></i></a>
-				</li>
-				<!--
-                                         <li class="nav-item">
-                                             <a class="nav-link " href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
-                                         </li>
-                                         <li class="nav-item">
-                                             <a class="nav-link" href="#"><i class="fa fa-credit-card" aria-hidden="true"></i></a>
-                                         </li>
-                -->
 				<li class="nav-item ">
 					<a id="profileNavButton" class="nav-link" href=""><i class="fa fa-user-o" aria-hidden="true"></i></a>
 				</li>
 				<li class="nav-item ">
 					<a class="nav-link" href="settings.html"><i class="fa fa-cog" aria-hidden="true"></i></a>
 				</li>
-
 			</ul>
 		</div>
 
@@ -103,26 +93,6 @@
 					<!--</div>-->
 				<!--</div>-->
 			<!--</a>-->
-			<!--<a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal" id = "1">-->
-				<!--<div class="wrap" style="background: url('http://ipfs.io/ipfs/QmdzXCNtC8TxJydrGmHs3cGCG676uxQKj8kKrmyXU3Xtwp') no-repeat center center; background-size: contain;">-->
-					<!--<div class="hover col-12">-->
-						<!--<div class="col-10 offset-1">-->
-							<!--<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>-->
-							<!--<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>-->
-						<!--</div>-->
-					<!--</div>-->
-				<!--</div>-->
-			<!--</a>-->
-			<!--<a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal">-->
-				<!--<div class="wrap" style="background: url('http://ipfs.io/ipfs/QmdzXCNtC8TxJydrGmHs3cGCG676uxQKj8kKrmyXU3Xtwp') no-repeat center center; background-size: contain;">-->
-					<!--<div class="hover col-12">-->
-						<!--<div class="col-10 offset-1">-->
-							<!--<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>-->
-							<!--<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>-->
-						<!--</div>-->
-					<!--</div>-->
-				<!--</div>-->
-			<!--</a>-->
 		</div>
 
 			<!-- Modal -->
@@ -163,19 +133,14 @@
 			</div>
 
 
-
-
-
-
-
 		<div id="myModal" class="modal fade" role="dialog">
 				<div class="modal-dialog modal-lg" style="margin: 115px auto;">
 					<button class="dir" style="top: 50%; left: -40px;"><i class="fa fa-angle-left fa-3x" aria-hidden="true"></i></button>
 					<!-- Modal content-->
 					<div class="modal-content" style="border-radius: 0px;">
 
-						<div class="modal-body " style="padding: 0px">
-							<div class="single_profile_photo_inner">
+						<div class="modal-body" id="popup-photo" style="padding: 0px">
+							<!--<div class="single_profile_photo_inner">
 								<div class="wrap">
 								</div>
 							</div>
@@ -205,7 +170,7 @@
 
 								<hr style="width: 80%; margin: 0 auto 10px">
 								<textarea placeholder="Добавьте комментарий..."></textarea>
-							</div>
+							</div>-->
 						</div>
 					</div>
 					<button class="dir" style="top: 50%; right: -40px;"><i class="fa fa-angle-right fa-3x" aria-hidden="true"></i></button>
@@ -222,51 +187,7 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
-
-<script>
-    var cw = $('.single_profile_photo').width();
-    $('.single_profile_photo').css({'height':cw+'px'});
-    $(window).resize(function(){
-        var cw = $('.single_profile_photo').width();
-        $('.single_profile_photo').css({'height':cw+'px'});
-    });
-</script>
-<script>
-    $(document).ready( function() {
-        $(document).on('change', '.btn-file :file', function() {
-            var input = $(this),
-                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-            input.trigger('fileselect', [label]);
-        });
-        $('.btn-file :file').on('fileselect', function(event, label) {
-
-            var input = $(this).parents('.input-group').find(':text'),
-                log = label;
-
-            if( input.length ) {
-                input.val(log);
-            } else {
-                if( log ) alert(log);
-            }
-
-        });
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#img-upload').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-        $("#imgInp").change(function(){
-            readURL(this);
-        });
-    });
-</script>
-
+<script src="style.js"></script> <!-- Regina's style -->
 
 <script src="../web3.js"></script>
 <script src="../jquery-3.2.1.min.js"></script>
@@ -275,8 +196,50 @@
 		integrity="sha384-5bXRcW9kyxxnSMbOoHzraqa7Z0PQWIao+cgeg327zit1hz5LZCEbIMx/LWKPReuB"
 		crossorigin="anonymous"></script>
 <script type="text/javascript" src="../functions.js"></script>
+<script src="../renderings.js"></script> <!-- loadProfile -->
 
 <script>
+	function onSnippetClick(event) {
+		const post = posts[event.target.dataset.id];
+		document.querySelector("#popup-photo").innerHTML = `
+		<div class="modal-body " style="padding: 0px">
+							<div class="single_profile_photo_inner">
+								<div class="wrap full_img">
+								</div>
+							</div>
+							<div class="inner_panel">
+								<div class="profile_inner" style="padding: 20px 10px 0px">
+									<div class="col-3 " style="display: inline-block; float: left; ">
+										<img src="http://ipfs.io/ipfs/${user.ipfsLink}" class="photo mx-auto d-block" style="width: 50px; height: 50px;">
+									</div>
+									<div class="col-8  username" style="display: inline-block;">
+										<h5 style="line-height: 2.4;  font-weight: bold;" >Megan Fox</h5>
+
+									</div>
+								</div>
+								<hr style="width: 80%; margin: 0 auto">
+								<ul class="comments">
+									<li><a href="#">transformer </a>Красиво жить не запретишь</li>
+									<li><a href="#">megan </a><a href="#" class="user_link">@transformer </a>Это точно</li>
+									<li><a href="#">megan </a>Лучшая</li>
+									<li><a href="#">megan </a>Спасибо!</li>
+								</ul>
+								<hr style="width: 80%; margin: 0 auto 10px">
+								<div class="likes" style="width: 80%; margin: 0px 30px 10px">
+									<h5 > 34 <button style="border: none"> <i class="fa fa-circle-thin " aria-hidden="true"></i></button></h5>
+									<h5 > 4 <button style="border: none"> <i class="fa fa-comment-o " aria-hidden="true"></i></button></h5>
+									<p class="date">11 ноября </p>
+								</div>
+
+								<hr style="width: 80%; margin: 0 auto 10px">
+								<textarea placeholder="Добавьте комментарий..."></textarea>
+							</div>
+						</div>
+					`
+		$(".full_img").css("background", `url("http://ipfs.io/ipfs/${post.urlPhoto}") no-repeat center center`);
+
+	}
+
     var url = location.href;
     var urlNickname = url.substring(url.indexOf("?")+1);
     if (url == urlNickname) {
@@ -299,94 +262,7 @@
         } else {
             addressIsRegistred(userAddress, (res) => {
 				if (res == true) {
-					getUserNickname(userAddress, (userNickname) => {
-                        userNicknameGlobal = userNickname;
-						if (urlNickname != userNickname) {
-                            $("#nick-name").html(urlNickname);
-
-                            isFollowing(userNickname, urlNickname, (res) => {
-                                if (res == true) {
-                                    $("#divNicknameAndButton").append('<button id="unfollowButton">Отписаться</button>');
-
-                                    $("#unfollowButton").click(function() {
-                                        $("#loader").show();
-                                        Enstagrm.unfollow(urlNickname, {from: web3.eth.defaultAccount, gas:3000000}, (err, res) => {
-                                            if (err) {
-                                                console.log(err);
-                                            } else {
-                                                console.log(res);
-                                                $("#unfollow").html("ok");
-                                            }
-                                            $("#loader").hide();
-                                        });
-                                    });
-
-								} else {
-
-                                    $("#divNicknameAndButton").append('<button id="followButton">Подписаться</button>');
-
-                                    $("#followButton").click(function() {
-                                        $("#loader").show();
-                                        Enstagrm.follow(urlNickname, {from: web3.eth.defaultAccount, gas:3000000}, (err, res) => {
-                                            if (err) {
-                                                console.log(err);
-                                            } else {
-                                                console.log(res);
-                                            }
-                                            $("#loader").hide();
-                                        });
-                                    });
-                                }
-                            });
-						} else {
-                            $("#nick-name").html(urlNickname + " (you)");
-						}
-
-						getUserProfile(urlNickname, (profile) => {
-							$("#real-name").html(profile["realName"]);
-							$("#bio").html(profile["bio"]);
-							if (profile.ipfsLink == "") {
-								$("#avatar").attr("src", "bootstrap/images/altphoto.png");
-							} else {
-								$("#avatar").attr("src", "http://ipfs.io/ipfs/" + profile.ipfsLink);
-							}
-						});
-
-						countUserFollowers(urlNickname, (result) => {
-							$("#followers-count").html('<strong>' + result + '</strong>' + " подписчиков");
-						});
-
-						countUserFollowings(urlNickname, (result) => {
-							$("#following-count").html('<strong>' + result + '</strong>' + " подписок");
-						});
-
-						countUserPosts(urlNickname, (result) => {
-							$("#wall-count").html('<strong>' + result + '</strong>' + " публикаций");
-						});
-
-						getUserPosts(urlNickname, (result) => {
-							console.log(result);
-							result.forEach(function (item) {
-								$("#profile_photos").append(
-									'<a class="single_profile_photo" href="#' + item["postId"] + '" data-toggle="modal" data-target="#myModal" id="' + item['postId'] + '">\n' +
-									'\t\t\t\t<div class="wrap" style="background: url(\'http://ipfs.io/ipfs/' + item["urlPhoto"] + '\') no-repeat center center; background-size: contain;">\n' +
-									'\t\t\t\t\t<div class="hover col-12">\n' +
-									'\t\t\t\t\t\t<div class="col-10 offset-1">\n' +
-									'\t\t\t\t\t\t\t<p class="hover_info">' + item["likesCount"] + '<i class="fa fa-circle-thin" aria-hidden="true"></i></p>\n' +
-									'\t\t\t\t\t\t\t<p class="hover_info">' + item["commentsCount"] + '<i class="fa fa-comment-o" aria-hidden="true"></i></p>\n' +
-									'\t\t\t\t\t\t</div>\n' +
-									'\t\t\t\t\t</div>\n' +
-									'\t\t\t\t</div>\n' +
-									'\t\t\t</a>'
-								);
-							});
-
-							$(".single_profile_photo").click(function () {
-								var id = $(this).attr('id');
-								console.log(id);
-							});
-						});
-					});
+					loadProfile(userAddress, urlNickname);
 
 				} else {
 					location = "index.html";

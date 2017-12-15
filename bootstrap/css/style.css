@@ -220,7 +220,7 @@ p, p i:hover{
   display: inline-block;
 }
 
-@media(max-width: 992px){
+@media(max-width: 592px){
   #myModal, .modal, .fade, .hover{
     display: none!important;
   }
