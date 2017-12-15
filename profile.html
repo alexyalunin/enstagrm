@@ -23,7 +23,7 @@
 	<div class="container">
 
 
-		<a class="navbar-brand " href="#"><img src="bootstrap/images/logo.png"></a>
+		<a class="navbar-brand " href="index.html"><img src="bootstrap/images/logo.png"></a>
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -46,7 +46,7 @@
                                          </li>
                 -->
 				<li class="nav-item ">
-					<a class="nav-link" href="profile.html"><i class="fa fa-user-o" aria-hidden="true"></i></a>
+					<a id="profileNavButton" class="nav-link" href=""><i class="fa fa-user-o" aria-hidden="true"></i></a>
 				</li>
 				<li class="nav-item ">
 					<a class="nav-link" href="settings.html"><i class="fa fa-cog" aria-hidden="true"></i></a>
@@ -83,7 +83,7 @@
 	<div class="row justify-content-center">
 		<div class="profile_photos" id="profile_photos">
 
-			<a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal">
+			<a class="single_profile_photo" href="" data-toggle="modal" data-target="#myModal">
 				<div class="wrap" style="background: url('http://ipfs.io/ipfs/QmS1zUfLZeyHu2PY8uZNrLXBE6yoS3XUed9H9iE4gNPErr') no-repeat center center; background-size: contain;">
 					<div class="hover col-12">
 						<div class="col-10 offset-1">
@@ -279,8 +279,17 @@
 <script>
     var url = location.href;
     var urlNickname = url.substring(url.indexOf("?")+1);
-    var userNicknameGlobal = "";
     if (url == urlNickname) {
+        location = "index.html";
+	}
+
+	try {
+        nicknameIsAvailable(urlNickname, (res) => {
+            if (res == true) {
+                location = "404.html";
+            }
+        });
+	} catch (e) {
         location = "index.html";
 	}
 
