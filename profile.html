@@ -35,7 +35,7 @@
 					<img id="loader" src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif" style="display: none;" height="50" width="50">
 				</li>
 				<li class="nav-item ">
-					<a class="nav-link" href="#"><i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#myModalAddPhoto"></i></a>
+					<a class="nav-link"><i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#myModalAddPhoto"></i></a>
 				<li class="nav-item ">
 					<a id="profileNavButton" class="nav-link" href=""><i class="fa fa-user-o" aria-hidden="true"></i></a>
 				</li>
@@ -62,8 +62,8 @@
 				</div>
 				<ul class="col-12 counters">
 					<li class="col-4" id="wall-count"></li>
-					<li class="col-4" id="followers-count"></li>
-					<li class="col-4" id="following-count"></li>
+					<li class="col-4" id="followers-count" data-toggle="modal" data-target="#myModalFollowersList" onclick="showFollowersModal()"></li>
+					<li class="col-4" id="following-count" data-toggle="modal" data-target="#myModalFollowingsList" onclick="showFollowingsModal()"></li>
 				</ul>
 				<h6 class="col-12 description"><span style="font-family: Gotham; margin-right: 20px;" id="real-name"></span>
 					<span id="bio"></span></h6>
@@ -72,19 +72,8 @@
 	</div>
 	<div class="row justify-content-center">
 		<div class="profile_photos" id="profile_photos">
-
-			<a class="single_profile_photo" href="" data-toggle="modal" data-target="#myModal">
-				<div class="wrap" style="background: url('http://ipfs.io/ipfs/QmS1zUfLZeyHu2PY8uZNrLXBE6yoS3XUed9H9iE4gNPErr') no-repeat center center; background-size: contain;">
-					<div class="hover col-12">
-						<div class="col-10 offset-1">
-							<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>
-							<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>
-						</div>
-					</div>
-				</div>
-			</a>
-			<!--<a class="single_profile_photo" href="#" data-toggle="modal" data-target="#myModal"  id = "2">-->
-				<!--<div class="wrap" style="background: url('http://ipfs.io/ipfs/QmTbP7T9Fc27BgN9n6xTCywDb9c3auy4KUjPGrP9KJxiye') no-repeat center center; background-size: contain;">-->
+			<!--<a class="single_profile_photo" href="" data-toggle="modal" data-target="#myModal">-->
+				<!--<div class="wrap" style="background: url('http://ipfs.io/ipfs/QmS1zUfLZeyHu2PY8uZNrLXBE6yoS3XUed9H9iE4gNPErr') no-repeat center center; background-size: contain;">-->
 					<!--<div class="hover col-12">-->
 						<!--<div class="col-10 offset-1">-->
 							<!--<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>-->
@@ -97,83 +86,136 @@
 
 			<!-- Modal -->
 		<div id="myModalAddPhoto" class="modal fade" role="dialog">
-				<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-lg">
 
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4 class="modal-title">New photo</h4>
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-						</div>
-						<div class="modal-body">
-							<div class="container">
-								<div class="col-md-10 offset-md-1">
-									<div class="form-group ">
-										<div class="input-group">
-	  											<span class="input-group-btn">
-	  												<span class="btn btn-primary btn-file" style="height: 40px; margin-top: 20px;">
-	  													Browse… <input type="file" id="imgInp">
-	  												</span>
-	  											</span>
-											<input type="text" class="form-control" readonly>
-										</div>
-										<img id='img-upload'/>
-										<label id="your_comments">Your comments:</label>
-										<input type="text" class="form-control" id="your_comments_input" style="width: 100%; height: auto; margin: 20px auto" placeholder="Enter text">
-										<button id="addPostButton" class="btn btn-primary" type="submit" >Submit</button>
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">New photo</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="container">
+							<div class="col-md-10 offset-md-1">
+								<div class="form-group ">
+									<div class="input-group">
+											<span class="input-group-btn">
+												<span class="btn btn-primary btn-file" style="height: 40px; margin-top: 20px;">
+													Browse… <input type="file" id="imgInp">
+												</span>
+											</span>
+										<input type="text" class="form-control" readonly>
 									</div>
+									<img id='img-upload'/>
+									<label id="your_comments">Your comments:</label>
+									<input type="text" class="form-control" id="your_comments_input" style="width: 100%; height: auto; margin: 20px auto" placeholder="Enter text">
+									<button id="addPostButton" class="btn btn-primary" type="submit" >Submit</button>
 								</div>
 							</div>
 						</div>
-						<div class="modal-footer">
-						</div>
+					</div>
+					<div class="modal-footer">
 					</div>
 				</div>
 			</div>
+		</div>
 
 
 		<div id="myModal" class="modal fade" role="dialog">
-				<div class="modal-dialog modal-lg" style="margin: 115px auto;">
-					<button class="dir" style="top: 50%; left: -40px;"><i class="fa fa-angle-left fa-3x" aria-hidden="true"></i></button>
-					<!-- Modal content-->
-					<div class="modal-content" style="border-radius: 0px;">
+			<div class="modal-dialog modal-lg" style="margin: 115px auto;">
+				<button class="dir" style="top: 50%; left: -40px;"><i class="fa fa-angle-left fa-3x" aria-hidden="true"></i></button>
+				<!-- Modal content-->
+				<div class="modal-content" style="border-radius: 0px;">
 
-						<div class="modal-body" id="popup-photo" style="padding: 0px">
-							<!--<div class="single_profile_photo_inner">
-								<div class="wrap">
+					<div class="modal-body" id="popup-photo" style="padding: 0px">
+						<!--<div class="single_profile_photo_inner">
+							<div class="wrap">
+							</div>
+						</div>
+						<div class="inner_panel">
+							<div class="profile_inner" style="padding: 20px 10px 0px">
+								<div class="col-3 " style="display: inline-block; float: left; ">
+									<img src="bootstrap/images/meg.jpg" class="photo mx-auto d-block" style="width: 50px; height: 50px;">
+								</div>
+								<div class="col-8  username" style="display: inline-block;">
+									<h5 style="line-height: 2.4;  font-weight: bold;" >Megan Fox</h5>
+
 								</div>
 							</div>
-							<div class="inner_panel">
-								<div class="profile_inner" style="padding: 20px 10px 0px">
-									<div class="col-3 " style="display: inline-block; float: left; ">
-										<img src="bootstrap/images/meg.jpg" class="photo mx-auto d-block" style="width: 50px; height: 50px;">
-									</div>
-									<div class="col-8  username" style="display: inline-block;">
-										<h5 style="line-height: 2.4;  font-weight: bold;" >Megan Fox</h5>
+							<hr style="width: 80%; margin: 0 auto">
+							<ul class="comments">
+								<li><a href="#">transformer </a>Красиво жить не запретишь</li>
+								<li><a href="#">megan </a><a href="#" class="user_link">@transformer </a>Это точно</li>
+								<li><a href="#">megan </a>Лучшая</li>
+								<li><a href="#">megan </a>Спасибо!</li>
+							</ul>
+							<hr style="width: 80%; margin: 0 auto 10px">
+							<div class="likes" style="width: 80%; margin: 0px 30px 10px">
+								<h5 > 34 <button style="border: none"> <i class="fa fa-circle-thin " aria-hidden="true"></i></button></h5>
+								<h5 > 4 <button style="border: none"> <i class="fa fa-comment-o " aria-hidden="true"></i></button></h5>
+								<p class="date">11 ноября </p>
+							</div>
 
-									</div>
-								</div>
-								<hr style="width: 80%; margin: 0 auto">
-								<ul class="comments">
-									<li><a href="#">transformer </a>Красиво жить не запретишь</li>
-									<li><a href="#">megan </a><a href="#" class="user_link">@transformer </a>Это точно</li>
-									<li><a href="#">megan </a>Лучшая</li>
-									<li><a href="#">megan </a>Спасибо!</li>
-								</ul>
-								<hr style="width: 80%; margin: 0 auto 10px">
-								<div class="likes" style="width: 80%; margin: 0px 30px 10px">
-									<h5 > 34 <button style="border: none"> <i class="fa fa-circle-thin " aria-hidden="true"></i></button></h5>
-									<h5 > 4 <button style="border: none"> <i class="fa fa-comment-o " aria-hidden="true"></i></button></h5>
-									<p class="date">11 ноября </p>
-								</div>
-
-								<hr style="width: 80%; margin: 0 auto 10px">
-								<textarea placeholder="Добавьте комментарий..."></textarea>
-							</div>-->
-						</div>
+							<hr style="width: 80%; margin: 0 auto 10px">
+							<textarea placeholder="Добавьте комментарий..."></textarea>
+						</div>-->
 					</div>
-					<button class="dir" style="top: 50%; right: -40px;"><i class="fa fa-angle-right fa-3x" aria-hidden="true"></i></button>
 				</div>
+				<button class="dir" style="top: 50%; right: -40px;"><i class="fa fa-angle-right fa-3x" aria-hidden="true"></i></button>
+			</div>
+		</div>
+
+
+		<div id="myModalFollowersList" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-md">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Followers</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body" id="popup-followers">
+						<!--<div class="container">-->
+							<!--<div class="form-group ">-->
+								<!--<ul class="follow_people">-->
+									<!--<li><a href="#">Person1</a></li>-->
+									<!--<li><a href="#">Person1</a></li>-->
+							<!--</div>-->
+						<!--</div>-->
+					</div>
+					<div class="modal-footer">
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="myModalFollowingsList" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-md">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Followings</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body" id="popup-followings">
+						<!--<div class="container">-->
+							<!--<div class="form-group ">-->
+								<!--<ul class="follow_people">-->
+									<!--<li><a href="#">Person1</a></li>-->
+									<!--<li><a href="#">Person1</a></li>-->
+									<!--<li><a href="#">Person1</a></li>-->
+								<!--</ul>-->
+
+							<!--</div>-->
+						<!--</div>-->
+					</div>
+					<div class="modal-footer">
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</div>
@@ -198,12 +240,47 @@
 <script src="../renderings.js"></script> <!-- loadProfile -->
 
 <script>
+    var url = location.href;
+    var urlNickname = url.substring(url.indexOf("?")+1);
+    if (url == urlNickname) {
+        location = "index.html";
+    }
+
+    function showFollowersModal() {
+        getUserFollowers(urlNickname, (followers) => {
+            $("#popup-followers").html(`
+				<div class="container">
+					<div class="form-group ">
+						<ul class="followers">
+						</ul>
+					</div>
+				</div>
+			`);
+            followers.forEach(function (follower) {
+                $('.followers').append('<li><a href="profile.html?' + follower +'">' + follower + '</a></li>');
+            });
+		});
+	}
+
+    function showFollowingsModal() {
+        getUserFollowings(urlNickname, (followings) => {
+            $("#popup-followings").html(`
+				<div class="container">
+					<div class="form-group ">
+						<ul class="followings">
+						</ul>
+					</div>
+				</div>
+			`);
+            followings.forEach(function (following) {
+                $('.followings').append('<li><a href="profile.html?' + following +'">' + following + '</a></li>');
+            });
+        });
+    }
 
 	function onSnippetClick(event) {
 		// const post = posts[event.target.dataset.id];
         const postId = $(this).attr('id');
-
-
 
         getPost(postId, (post) => {
             $("#popup-photo").html(`
@@ -281,11 +358,6 @@
 
 	}
 
-    var url = location.href;
-    var urlNickname = url.substring(url.indexOf("?")+1);
-    if (url == urlNickname) {
-        location = "index.html";
-	}
 
 	try {
         nicknameIsAvailable(urlNickname, (res) => {

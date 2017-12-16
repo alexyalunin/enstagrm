@@ -6,7 +6,7 @@ function loadProfile(userAddress, urlNickname) {
 
             isFollowing(userNickname, urlNickname, (res) => {
                 if (res == true) {
-                    $("#divNicknameAndButton").append('<button id="unfollowButton">Отписаться</button>');
+                    $("#divNicknameAndButton").append('<button id="unfollowButton" class="btn btn-primary" style="font-family: Gotham; margin-left: 15px">Отписаться</button>');
 
                     $("#unfollowButton").click(function() {
                         $("#loader").show();
@@ -15,7 +15,7 @@ function loadProfile(userAddress, urlNickname) {
                                 console.log(err);
                             } else {
                                 console.log(res);
-                                $("#unfollow").html("ok");
+                                location.reload();
                             }
                             $("#loader").hide();
                         });
@@ -23,7 +23,7 @@ function loadProfile(userAddress, urlNickname) {
 
 				} else {
 
-                    $("#divNicknameAndButton").append('<button id="followButton">Подписаться</button>');
+                    $("#divNicknameAndButton").append('<button id="followButton" class="btn btn-primary" style="font-family: Gotham; margin-left: 15px">Подписаться</button>');
 
                     $("#followButton").click(function() {
                         $("#loader").show();
@@ -32,6 +32,7 @@ function loadProfile(userAddress, urlNickname) {
                                 console.log(err);
                             } else {
                                 console.log(res);
+                                location.reload();
                             }
                             $("#loader").hide();
                         });
@@ -81,6 +82,6 @@ function loadProfile(userAddress, urlNickname) {
 
 			$(".single_profile_photo").click(onSnippetClick);
 		});
-	})
+	});
 }
 		

@@ -161,8 +161,8 @@
         getUserNickname(web3.eth.defaultAccount, (nick) => {
             getUserProfile( nick, (profile) => {
                 $("#real-name").val(profile["realName"]);
-                $("#bio").val(profile["bio"])
-                $("#avatar").attr("src", "http://ipfs.io/ipfs/" + profile.ipfsLink);
+                $("#bio").val(profile["bio"]);
+                profile.ipfsLink == "" ? $("#avatar").attr("src", "bootstrap/images/altphoto.png") : $("#avatar").attr("src", "http://ipfs.io/ipfs/" + profile.ipfsLink);
             });
         });
 	</script>
