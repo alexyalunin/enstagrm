@@ -14,44 +14,38 @@
 <script src="../web3.js"></script>
 <script src="../jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="../functions.js"></script>
-<script src="node_modules/routes/dist/routes.js"></script>
+
 <script>
-
-//    var Router = require('routes');
-//    var router = Router();
-//    var noop = function(){
-//        return "hello world!";
-//    };
-//
-//    router.addRoute("/inn", noop);
-
     try {
-        if (userAddress === undefined)
-            location = "login.html";
-        else
-            Enstagrm.addressIsRegistred(userAddress, (err, res) => {
-                if (err) {
-                    console.log(err);
-                    location = "login.html";
-                } else {
-                    if (res == true) {
-                        Enstagrm.getUserNickname(userAddress, (err, res) => {
-                            if (err) {
-                                console.log(err);
-                                location = "login.html";
-                            } else {
-                                location = "profile.html?" + web3.toAscii(res);
-                            }
-                        });
-                    } else {
+        web3.eth.getAccounts((error, result) => {
+            if (error) {
+                location = "login.html";
+            } else {
+                var userAddress = result[0];
+                Enstagrm.addressIsRegistred(userAddress, (err, res) => {
+                    if (err) {
+                        console.log(err);
                         location = "login.html";
+                    } else {
+                        if (res == true) {
+                            Enstagrm.getUserNickname(userAddress, (err, res) => {
+                                if (err) {
+                                    console.log(err);
+                                    location = "login.html";
+                                } else {
+                                    location = "profile.html?" + web3.toAscii(res);
+                                }
+                            });
+                        } else {
+                            location = "login.html";
+                        }
                     }
-                }
-            });
+                });
+            }
+        });
     } catch (e) {
         location = "login.html";
     }
-
 </script>
 
 </html>

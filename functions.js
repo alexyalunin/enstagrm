@@ -24,6 +24,99 @@ web3.eth.getAccounts((error, result) => {
 
 
 
+function nicknameIsAvailable(nick, callback) {
+    Enstagrm.nicknameIsAvailable(nick, (err, res) => {
+        if (err) {
+            console.log(err);
+            location="404.html";
+        } else {
+            callback(res);
+        }
+    });
+}
+
+function addressIsRegistred(address, callback) {
+    Enstagrm.addressIsRegistred(address, (err, res) => {
+        if (err) {
+            console.log(err);
+            location="index.html";
+        } else {
+            if (res == true){
+                callback(res);
+            } else {
+                location="index.html";
+            }
+        }
+    });
+}
+
+function getUserNickname(address, callback) {
+    Enstagrm.getUserNickname(address, (err, res) => {
+        if (err) {
+            console.log(err);
+            callback("User is not registred")
+            location = "login.html";
+        } else {
+            callback(web3.toAscii(res).replace(/\0/g, ''));
+        }
+    });
+}
+
+function getUserProfile(nickname, callback) {
+    Enstagrm.getUserProfile(nickname, (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(res);
+            callback( {
+                "realName": web3.toAscii(res[0]).replace(/\0/g, ''),
+                "bio": res[1],
+                "ipfsLink": res[2]
+            });
+        }
+    });
+}
+
+function countUserFollowers(nickname, callback) {
+    Enstagrm.countUserFollowers(nickname, (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            callback(res.c);
+        }
+    });
+}
+
+function countUserFollowings(nickname, callback) {
+    Enstagrm.countUserFollowings(nickname, (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            callback(res.c);
+        }
+    });
+}
+
+function countUserPosts(nickname, callback) {
+    Enstagrm.countUserPosts(nickname, (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            callback(res.c);
+        }
+    });
+}
+
+function isFollowing(nickname1, nickname2, callback) {
+    Enstagrm.isFollowing(nickname1, nickname2, (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            callback(res);
+        }
+    });
+}
+
 
 function getUserFollowers(nick, callback) {
     Enstagrm.getUserFollowers(nick, (err, res) => {
@@ -54,179 +147,19 @@ function getUserFollowings(nick, callback) {
 }
 
 
-function updateComments(postId) {
-    loadComments(postId, (comments)=>{
-        $('#loadCommentsLi').hide();
-        comments.forEach(function (comment) {
-            $('.comments').append('<li><a href="profile.html?' + comment["creator"] + '">' + comment["creator"] + ' </a>' + comment["text"] + ' </li>');
-        });
-    });
-}
-function loadComments(postId, callback) {
-    Enstagrm.countPostCommentsLength(postId, (err, len) => {
-        if (err) {
-            console.log(err);
-        } else {
-            var comments = [];
-            for (var i = 0; i < len; i++) {
-                (function(index) {
-                    Enstagrm.getPostComment(postId, index, (err, res) => {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            var creator = web3.toAscii(res[0]).replace(/\0/g, '');
-                            var text = res[1];
-                            var myDate = (new Date(res[2]*1000)).toLocaleString();
-                            comments.push({
-                                "creator": creator,
-                                "text": text,
-                                "myDate": myDate
-                            });
-                            if (index == len - 1) {
-                                console.log(comments);
-                                callback(comments);
-                            }
-                        }
-                    });
-                })(i);
-            }
-        }
-    });
-}
-
-function likePost(postId, callback) {
-    $("#loader").show();
-    Enstagrm.like(postId, {from: web3.eth.defaultAccount, gas:300000}, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(res);
-        }
-        $("#loader").hide();
-    });
-}
-
-function commentPost(postId, text, callback) {
-    Enstagrm.comment(postId, text, {from: web3.eth.defaultAccount, gas:300000}, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(res);
-        }
-        $("#loader").hide();
-    });
-}
-
-function nicknameIsAvailable(nick, callback) {
-    Enstagrm.nicknameIsAvailable(nick, (err, res) => {
-        if (err) {
-            console.log(err);
-            location="404.html";
-        } else {
-            callback(res);
-        }
-    });
-}
-
-function addressIsRegistred(address, callback) {
-    Enstagrm.addressIsRegistred(address, (err, res) => {
-        if (err) {
-            console.log(err);
-            location="index.html";
-        } else {
-            if (res == true){
-                callback(res);
-            } else {
-                location="index.html";
-            }
-        }
-    });
-}
-
-function isFollowing(nickname1, nickname2, callback) {
-    Enstagrm.isFollowing(nickname1, nickname2, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            callback(res);
-        }
-    });
-}
-
-
-function getUserProfile(nickname, callback) {
-    Enstagrm.getUserProfile(nickname, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(res);
-            callback( {
-                "realName": web3.toAscii(res[0]).replace(/\0/g, ''),
-                "bio": res[1],
-                "ipfsLink": res[2]
-            });
-        }
-    });
-}
-
-function countUserFollowers(nickname, callback) {
-    Enstagrm.countUserFollowers(nickname, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(res);
-            callback(res.c);
-        }
-    });
-}
-
-function countUserFollowings(nickname, callback) {
-    Enstagrm.countUserFollowings(nickname, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(res);
-            callback(res.c);
-        }
-    });
-}
-
-function countUserPosts(nickname, callback) {
-    Enstagrm.countUserPosts(nickname, (err, res) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(res);
-            callback(res.c);
-        }
-    });
-}
-
-function getUserNickname(address, callback) {
-    Enstagrm.getUserNickname(address, (err, res) => {
-        if (err) {
-            console.log(err);
-            callback("User is not registred")
-            location = "login.html";
-        } else {
-            callback(web3.toAscii(res).replace(/\0/g, ''));
-        }
-    });
-}
-
-
 function getUserPosts(nickname, callback) {
     Enstagrm.getUserPostIds(nickname, (err, res) => {
         if (err) {
             console.log(err);
         } else {
-            arrOfIndices = [];
+            var arrOfIndices = [];
             res.forEach(function(item) {
                 arrOfIndices.push(item.c);
             });
-            posts = [];
-            for (var i = 0, len = arrOfIndices.length; i < len; i++) {
-                (function(index) {
+            var posts = [];
+
+            (function doSynchronousLoop(posts, index, len) {
+                if (index < len) {
                     var postId = arrOfIndices[index][0];
                     Enstagrm.getPost(postId, (err, resultPostInfo) => {
                         if (err) {
@@ -253,17 +186,17 @@ function getUserPosts(nickname, callback) {
                                             "likesCount": likes,
                                             "commentsCount": comments
                                         });
-                                        if (index == len-1) {
-                                            callback(posts);
-                                        }
-
+                                        doSynchronousLoop(posts, ++index, len);
                                     });
                                 }
                             });
                         }
                     });
-                })(i)
-            }
+                } else {
+                    callback(posts);
+                }
+            })(posts, 0, arrOfIndices.length);
+
         }
     });
 };
@@ -304,37 +237,68 @@ function getPost(postId, callback) {
 };
 
 
+function updateComments(postId) {
+    loadComments(postId, (comments)=>{
+        $('#loadCommentsLi').hide();
+        comments.forEach(function (comment) {
+            $('.comments').append('<li><a href="profile.html?' + comment["creator"] + '">' + comment["creator"] + ' </a>' + comment["text"] + ' </li>');
+        });
+    });
+}
 
-
-
-
-$("#followButton").click(function() {
-    $("#loader").show();
-    Enstagrm.follow($("#nicknameInput").val(), {from: web3.eth.defaultAccount, gas:300000}, (err, res) => {
+function loadComments(postId, callback) {
+    Enstagrm.countPostCommentsLength(postId, (err, len) => {
         if (err) {
             console.log(err);
-            $("#follow").html("error");
+        } else {
+            var comments = [];
+            (function doSynchronousLoop(comments, index, len) {
+                if (index < len) {
+                    Enstagrm.getPostComment(postId, index, (err, res) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            var creator = web3.toAscii(res[0]).replace(/\0/g, '');
+                            var text = res[1];
+                            var myDate = (new Date(res[2] * 1000)).toLocaleString();
+                            comments.push({
+                                "creator": creator,
+                                "text": text,
+                                "myDate": myDate
+                            });
+                            doSynchronousLoop(comments, ++index, len);
+                        }
+                    });
+                } else {
+                    callback(comments);
+                }
+            })(comments, 0, len);
+        }
+    });
+}
+
+function likePost(postId, callback) {
+    $("#loader").show();
+    Enstagrm.like(postId, {from: web3.eth.defaultAccount, gas:300000}, (err, res) => {
+        if (err) {
+            console.log(err);
         } else {
             console.log(res);
-            $("#follow").html("ok");
         }
         $("#loader").hide();
     });
-});
+}
 
-$("#unfollowButton").click(function() {
-    $("#loader").show();
-    Enstagrm.unfollow($("#nicknameInput").val(), {from: web3.eth.defaultAccount, gas:300000}, (err, res) => {
+function commentPost(postId, text, callback) {
+    Enstagrm.comment(postId, text, {from: web3.eth.defaultAccount, gas:300000}, (err, res) => {
         if (err) {
             console.log(err);
-            $("#unfollow").html("error");
         } else {
             console.log(res);
-            $("#unfollow").html("ok");
         }
         $("#loader").hide();
     });
-});
+}
 
 
 $("#fillProfileButton").click(function() {
@@ -377,6 +341,7 @@ $("#fillProfileButton").click(function() {
 
 
 $("#addPostButton").click(function() {
+    event.preventDefault();
     $("#loader").show();
 
     const reader = new FileReader();
@@ -402,8 +367,7 @@ $("#addPostButton").click(function() {
                 $("#loader").hide();
             });
 
-        location = "/index.html";
-
+            location.reload();
         })
     }
     const photo = document.getElementById("imgInp");
@@ -411,8 +375,6 @@ $("#addPostButton").click(function() {
 });
 
 
-
-// ------------------Set------------------
 
 $("#registerButton").click(function(event) {
     event.preventDefault();
@@ -428,39 +390,6 @@ $("#registerButton").click(function(event) {
         }
     });
 });
-
-
-
-
-
-$("#likeButton").click(function() {
-    $("#loader").show();
-    Enstagrm.like($("#postIdInput").val(), {from: web3.eth.defaultAccount, gas:300000}, (err, res) => {
-        if (err) {
-            console.log(err);
-            $("#like").html("error");
-        } else {
-            console.log(res);
-            $("#like").html("ok");
-        }
-        $("#loader").hide();
-    });
-});
-
-$("#commentButton").click(function() {
-    $("#loader").show();
-    Enstagrm.comment($("#postIdInput").val(), $("#commentText").val(), {from: web3.eth.defaultAccount, gas:300000}, (err, res) => {
-        if (err) {
-            console.log(err);
-            $("#comment").html("error");
-        } else {
-            console.log(res);
-            $("#comment").html("ok");
-        }
-        $("#loader").hide();
-    });
-});
-
 
 
 

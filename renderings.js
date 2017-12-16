@@ -10,7 +10,7 @@ function loadProfile(userAddress, urlNickname) {
 
                     $("#unfollowButton").click(function() {
                         $("#loader").show();
-                        Enstagrm.unfollow(urlNickname, {from: web3.eth.defaultAccount, gas:3000000}, (err, res) => {
+                        Enstagrm.unfollow(urlNickname, {from: web3.eth.defaultAccount, gas:300000}, (err, res) => {
                             if (err) {
                                 console.log(err);
                             } else {
@@ -27,7 +27,7 @@ function loadProfile(userAddress, urlNickname) {
 
                     $("#followButton").click(function() {
                         $("#loader").show();
-                        Enstagrm.follow(urlNickname, {from: web3.eth.defaultAccount, gas:3000000}, (err, res) => {
+                        Enstagrm.follow(urlNickname, {from: web3.eth.defaultAccount, gas:300000}, (err, res) => {
                             if (err) {
                                 console.log(err);
                             } else {
@@ -63,7 +63,8 @@ function loadProfile(userAddress, urlNickname) {
 		});
 
 		getUserPosts(urlNickname, (result) => {
-			posts = result;
+			var posts = result;
+			console.log(result);
 			result.forEach(function (item) {
 				console.log(item);
 				$("#profile_photos").append(
