@@ -121,7 +121,6 @@
 										<label id="your_comments">Your comments:</label>
 										<input type="text" class="form-control" id="your_comments_input" style="width: 100%; height: auto; margin: 20px auto" placeholder="Enter text">
 										<button id="addPostButton" class="btn btn-primary" type="submit" >Submit</button>
-										<img id="loader" src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif" style="display: none;">
 									</div>
 								</div>
 							</div>
@@ -199,44 +198,86 @@
 <script src="../renderings.js"></script> <!-- loadProfile -->
 
 <script>
+
 	function onSnippetClick(event) {
-		const post = posts[event.target.dataset.id];
-		document.querySelector("#popup-photo").innerHTML = `
-		<div class="modal-body " style="padding: 0px">
-							<div class="single_profile_photo_inner">
-								<div class="wrap full_img">
-								</div>
-							</div>
-							<div class="inner_panel">
-								<div class="profile_inner" style="padding: 20px 10px 0px">
-									<div class="col-3 " style="display: inline-block; float: left; ">
-										<img src="http://ipfs.io/ipfs/${user.ipfsLink}" class="photo mx-auto d-block" style="width: 50px; height: 50px;">
-									</div>
-									<div class="col-8  username" style="display: inline-block;">
-										<h5 style="line-height: 2.4;  font-weight: bold;" >Megan Fox</h5>
+		// const post = posts[event.target.dataset.id];
+        const postId = $(this).attr('id');
 
-									</div>
-								</div>
-								<hr style="width: 80%; margin: 0 auto">
-								<ul class="comments">
-									<li><a href="#">transformer </a>Красиво жить не запретишь</li>
-									<li><a href="#">megan </a><a href="#" class="user_link">@transformer </a>Это точно</li>
-									<li><a href="#">megan </a>Лучшая</li>
-									<li><a href="#">megan </a>Спасибо!</li>
-								</ul>
-								<hr style="width: 80%; margin: 0 auto 10px">
-								<div class="likes" style="width: 80%; margin: 0px 30px 10px">
-									<h5 > 34 <button style="border: none"> <i class="fa fa-circle-thin " aria-hidden="true"></i></button></h5>
-									<h5 > 4 <button style="border: none"> <i class="fa fa-comment-o " aria-hidden="true"></i></button></h5>
-									<p class="date">11 ноября </p>
-								</div>
 
-								<hr style="width: 80%; margin: 0 auto 10px">
-								<textarea placeholder="Добавьте комментарий..."></textarea>
+
+        getPost(postId, (post) => {
+            $("#popup-photo").html(`
+				<div class="modal-body " style="padding: 0px">
+					<div class="single_profile_photo_inner">
+						<div class="wrap full_img">
+						</div>
+					</div>
+					<div class="inner_panel">
+						<div class="profile_inner" style="padding: 20px 10px 0px">
+							<div class="col-8  username" style="display: inline-block;">
+								<h5 style="line-height: 2.4;  font-weight: bold;" >${post["creator"]}</h5>
 							</div>
 						</div>
-					`
-		$(".full_img").css("background", `url("http://ipfs.io/ipfs/${post.urlPhoto}") no-repeat center center`);
+						<hr style="width: 80%; margin: 0 auto">
+						<ul class="comments">
+							<li><a href="profile.html?${post["creator"]}"> ${post["creator"]} </a> ${post["text"]} </li>
+							<li><a id="loadCommentsLi" onclick="updateComments(${postId});">Загрузить комментарии...</a></li>
+						</ul>
+						<hr style="width: 80%; margin: 0 auto 10px">
+						<div class="likes" style="width: 80%; margin: 0px 30px 10px">
+							<h5 > ${post["likesCount"]} <button onclick="likePost(${postId});" style="border: none"> <i class="fa fa-circle-thin " aria-hidden="true"></i></button></h5>
+							<h5 > ${post["commentsCount"]} <button onclick="commentPost(${postId}, $('#commentArea').val());" style="border: none"> <i class="fa fa-comment-o " aria-hidden="true"></i></button></h5>
+							<p class="date"> ${post["timestamp"]} </p>
+						</div>
+
+						<hr style="width: 80%; margin: 0 auto 10px">
+						<textarea id="commentArea" placeholder="Добавьте комментарий..."></textarea>
+					</div>
+				</div>
+			`);
+            $(".full_img").css("background", `url("http://ipfs.io/ipfs/${post["urlPhoto"]}") no-repeat center center`);
+            $(".full_img").css("background-size", `contain`);
+
+        });
+
+
+
+//		document.querySelector("#popup-photo").innerHTML = `
+//		<div class="modal-body " style="padding: 0px">
+//							<div class="single_profile_photo_inner">
+//								<div class="wrap full_img">
+//								</div>
+//							</div>
+//							<div class="inner_panel">
+//								<div class="profile_inner" style="padding: 20px 10px 0px">
+//									<div class="col-3 " style="display: inline-block; float: left; ">
+//										<img src="http://ipfs.io/ipfs/${user.ipfsLink}" class="photo mx-auto d-block" style="width: 50px; height: 50px;">
+//									</div>
+//									<div class="col-8  username" style="display: inline-block;">
+//										<h5 style="line-height: 2.4;  font-weight: bold;" >Megan Fox</h5>
+//
+//									</div>
+//								</div>
+//								<hr style="width: 80%; margin: 0 auto">
+//								<ul class="comments">
+//									<li><a href="#">transformer </a>Красиво жить не запретишь</li>
+//									<li><a href="#">megan </a><a href="#" class="user_link">@transformer </a>Это точно</li>
+//									<li><a href="#">megan </a>Лучшая</li>
+//									<li><a href="#">megan </a>Спасибо!</li>
+//								</ul>
+//								<hr style="width: 80%; margin: 0 auto 10px">
+//								<div class="likes" style="width: 80%; margin: 0px 30px 10px">
+//									<h5 > 34 <button style="border: none"> <i class="fa fa-circle-thin " aria-hidden="true"></i></button></h5>
+//									<h5 > 4 <button style="border: none"> <i class="fa fa-comment-o " aria-hidden="true"></i></button></h5>
+//									<p class="date">11 ноября </p>
+//								</div>
+//
+//								<hr style="width: 80%; margin: 0 auto 10px">
+//								<textarea placeholder="Добавьте комментарий..."></textarea>
+//							</div>
+//						</div>
+//					`
+//		$(".full_img").css("background", `url("http://ipfs.io/ipfs/${post.urlPhoto}") no-repeat center center`);
 
 	}
 

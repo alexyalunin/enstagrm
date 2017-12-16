@@ -11,7 +11,7 @@ var userNicknameGlobal = "";
 
 const userAddress = web3.eth.defaultAccount;
 const EnstagrmContract = web3.eth.contract([ { "constant": true, "inputs": [], "name": "getUsers", "outputs": [ { "name": "", "type": "bytes16[]" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_address", "type": "address" } ], "name": "getUserNickname", "outputs": [ { "name": "", "type": "bytes16" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_nickname", "type": "bytes16" } ], "name": "register", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "_id", "type": "uint32" } ], "name": "countPostLikes", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_id", "type": "uint32" }, { "name": "_text", "type": "string" } ], "name": "comment", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "_firstUser", "type": "bytes16" }, { "name": "_secondUser", "type": "bytes16" } ], "name": "isFollowing", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "countUserPosts", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_postId", "type": "uint32" }, { "name": "index", "type": "uint256" } ], "name": "getPostComment", "outputs": [ { "name": "", "type": "bytes16" }, { "name": "", "type": "string" }, { "name": "", "type": "uint64" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "countUserFollowers", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "getUserProfile", "outputs": [ { "name": "", "type": "bytes32" }, { "name": "", "type": "string" }, { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_id", "type": "uint32" } ], "name": "like", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "getUserFollowers", "outputs": [ { "name": "", "type": "bytes16[]" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "getUserPostIds", "outputs": [ { "name": "", "type": "uint32[]" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_address", "type": "address" } ], "name": "addressIsRegistred", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_urlPhoto", "type": "string" }, { "name": "_text", "type": "string" } ], "name": "addPost", "outputs": [ { "name": "", "type": "uint32" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "_id", "type": "uint32" } ], "name": "getPostLikes", "outputs": [ { "name": "", "type": "bytes16[]" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "countUserFollowings", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_postId", "type": "uint32" } ], "name": "countPostCommentsLength", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_nickname", "type": "bytes16" } ], "name": "nicknameIsAvailable", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_realName", "type": "bytes32" }, { "name": "_bio", "type": "string" }, { "name": "_ipfsLink", "type": "string" } ], "name": "fillProfile", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "getUserFollowings", "outputs": [ { "name": "", "type": "bytes16[]" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_id", "type": "uint32" } ], "name": "getPost", "outputs": [ { "name": "", "type": "bytes16" }, { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "uint64" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "follow", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "_userNickname", "type": "bytes16" } ], "name": "unfollow", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "countUsers", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "userAddress", "type": "address" }, { "indexed": false, "name": "userNickname", "type": "bytes32" } ], "name": "UserRegistred", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "userNickname", "type": "bytes16" }, { "indexed": false, "name": "realName", "type": "bytes32" }, { "indexed": false, "name": "bio", "type": "string" }, { "indexed": false, "name": "urlProfileImage", "type": "string" } ], "name": "ProfileUpdated", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "follower", "type": "bytes16" }, { "indexed": false, "name": "following", "type": "bytes16" } ], "name": "SubscriptionHappened", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "follower", "type": "bytes16" }, { "indexed": false, "name": "unfollowing", "type": "bytes16" } ], "name": "UnsubscribingHappened", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "postId", "type": "uint32" }, { "indexed": false, "name": "creator", "type": "bytes16" }, { "indexed": false, "name": "urlPhoto", "type": "string" }, { "indexed": false, "name": "text", "type": "string" }, { "indexed": false, "name": "timestamp", "type": "uint64" } ], "name": "PostAdded", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "postId", "type": "uint32" }, { "indexed": false, "name": "creator", "type": "bytes16" }, { "indexed": false, "name": "timestamp", "type": "uint64" } ], "name": "PostLiked", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "postId", "type": "uint32" }, { "indexed": false, "name": "creator", "type": "bytes16" }, { "indexed": false, "name": "text", "type": "string" }, { "indexed": false, "name": "timestamp", "type": "uint64" } ], "name": "PostCommented", "type": "event" }]);
-const Enstagrm = EnstagrmContract.at('0x628e39d90bc018e42dbedb76a93de09c2840aefd');
+const Enstagrm = EnstagrmContract.at('0x35dc38645d022a72eb649cff1caeff40d224d42c');
 
 
 getUserNickname(web3.eth.defaultAccount, (nick) => {
@@ -19,7 +19,68 @@ getUserNickname(web3.eth.defaultAccount, (nick) => {
     console.log(nick);
     $("#profileNavButton").attr("href", "profile.html?" + userNicknameGlobal);
 });
+function updateComments(postId) {
+    loadComments(postId, (comments)=>{
+        $('#loadCommentsLi').hide();
+        comments.forEach(function (comment) {
+            $('.comments').append('<li><a href="profile.html?' + comment["creator"] + '">' + comment["creator"] + ' </a>' + comment["text"] + ' </li>');
+        });
+    });
+}
+function loadComments(postId, callback) {
+    Enstagrm.countPostCommentsLength(postId, (err, len) => {
+        if (err) {
+            console.log(err);
+        } else {
+            var comments = [];
+            for (var i = 0; i < len; i++) {
+                (function(index) {
+                    Enstagrm.getPostComment(postId, index, (err, res) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            var creator = web3.toAscii(res[0]).replace(/\0/g, '');
+                            var text = res[1];
+                            var myDate = (new Date(res[2]*1000)).toLocaleString();
+                            comments.push({
+                                "creator": creator,
+                                "text": text,
+                                "myDate": myDate
+                            });
+                            if (index == len - 1) {
+                                console.log(comments);
+                                callback(comments);
+                            }
+                        }
+                    });
+                })(i);
+            }
+        }
+    });
+}
 
+function likePost(postId, callback) {
+    $("#loader").show();
+    Enstagrm.like(postId, {from: web3.eth.defaultAccount, gas:3000000}, (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(res);
+        }
+        $("#loader").hide();
+    });
+}
+
+function commentPost(postId, text, callback) {
+    Enstagrm.comment(postId, text, {from: web3.eth.defaultAccount, gas:3000000}, (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(res);
+        }
+        $("#loader").hide();
+    });
+}
 
 function nicknameIsAvailable(nick, callback) {
     Enstagrm.nicknameIsAvailable(nick, (err, res) => {
@@ -65,7 +126,7 @@ function getUserProfile(nickname, callback) {
         } else {
             console.log(res);
             callback( {
-                "realName": web3.toAscii(res[0]),
+                "realName": web3.toAscii(res[0]).replace(/\0/g, ''),
                 "bio": res[1],
                 "ipfsLink": res[2]
             });
@@ -112,7 +173,6 @@ function getUserNickname(address, callback) {
             console.log(err);
             location = "login.html";
         } else {
-            console.log(web3.toAscii(res));
             callback(web3.toAscii(res).replace(/\0/g, ''));
         }
     });
@@ -142,7 +202,7 @@ function getUserPosts(nickname, callback) {
                                 } else {
                                     Enstagrm.countPostCommentsLength(postId, (err, resultNumberOfComments) => {
 
-                                        var creator = web3.toAscii(resultPostInfo[0]);
+                                        var creator = web3.toAscii(resultPostInfo[0]).replace(/\0/g, '');
                                         var urlPhoto = resultPostInfo[1];
                                         var text = resultPostInfo[2];
                                         var timestamp = (new Date(resultPostInfo[3] * 1000)).toLocaleString();
@@ -171,6 +231,44 @@ function getUserPosts(nickname, callback) {
         }
     });
 };
+
+function getPost(postId, callback) {
+    Enstagrm.getPost(postId, (err, resultPostInfo) => {
+        if (err) {
+            console.log(err);
+        } else {
+            Enstagrm.countPostLikes(postId, (err, resultNumberOfLikes) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    Enstagrm.countPostCommentsLength(postId, (err, resultNumberOfComments) => {
+
+                        var creator = web3.toAscii(resultPostInfo[0]).replace(/\0/g, '');
+                        var urlPhoto = resultPostInfo[1];
+                        var text = resultPostInfo[2];
+                        var timestamp = (new Date(resultPostInfo[3] * 1000)).toLocaleString();
+                        var likes = resultNumberOfLikes.c[0];
+                        var comments = resultNumberOfComments.c[0];
+
+                        callback({
+                            "postId": postId,
+                            "creator": creator,
+                            "urlPhoto": urlPhoto,
+                            "text": text,
+                            "timestamp": timestamp,
+                            "likesCount": likes,
+                            "commentsCount": comments
+                        });
+
+                    });
+                }
+            });
+        }
+    });
+};
+
+
+
 
 
 
