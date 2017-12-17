@@ -1,0 +1,26 @@
+{
+  "name": "enstagrm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexyalunin/enstagrm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexyalunin/enstagrm/issues"
+  },
+  "homepage": "https://github.com/alexyalunin/enstagrm#readme",
+  "devDependencies": {
+    "lite-server": "^2.3.0"
+  },
+  "dependencies": {
+    "ethereumjs-testrpc": "^6.0.3",
+    "routes": "^2.1.0"
+  }
+}

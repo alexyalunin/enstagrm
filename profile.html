@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Enstagram</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="shortcut icon" href="bootstrap/images/favicon.png" type="image/png">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<!-- Bootstrap core CSS -->
+	<!--<link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">-->
+	<link rel="stylesheet" href="bootstrap/font-awesome/css/font-awesome.min.css">
+	<!-- Custom styles for this template -->
+	<link href="bootstrap/css/style.css" rel="stylesheet">
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-light fixed-top bg-white">
+	<div class="container">
+
+
+		<a class="navbar-brand" href="index.html">Enstagrm</a>
+
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse " style="flex-grow: 0"id="navbarCollapse">
+			<ul class="navbar-nav ">
+				<li>
+					<img id="loader" src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif" style="display: none;" height="50" width="50">
+				</li>
+				<li class="nav-item ">
+					<a class="nav-link"><i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#myModalAddPhoto"></i></a>
+				<li class="nav-item ">
+					<a id="profileNavButton" class="nav-link" href=""><i class="fa fa-user-o" aria-hidden="true"></i></a>
+				</li>
+				<li class="nav-item ">
+					<a class="nav-link" href="settings.html"><i class="fa fa-cog" aria-hidden="true"></i></a>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+</nav>
+
+
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="personal-info col-12 col-sm-10 col-auto  ">
+			<div class="col-12 col-sm-4 " style="display: inline-block; float: left">
+				<img src="" id="avatar" alt="" class="photo mx-auto d-block">
+			</div>
+			<div class="col-12  col-sm-8 info" style="display: inline-block; float: left">
+
+				<div id="divNicknameAndButton" class="col-8  username">
+					<h2 id="nick-name" style="display: inline-block"></h2>
+				</div>
+				<ul class="col-12 counters">
+					<li class="col-4" id="wall-count"></li>
+					<li class="col-4" id="followers-count" data-toggle="modal" data-target="#myModalFollowersList" onclick="showFollowersModal()"></li>
+					<li class="col-4" id="following-count" data-toggle="modal" data-target="#myModalFollowingsList" onclick="showFollowingsModal()"></li>
+				</ul>
+				<h6 class="col-12 description"><span style="font-family: Gotham; margin-right: 20px;" id="real-name"></span>
+					<span id="bio"></span></h6>
+			</div>
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		<div class="profile_photos" id="profile_photos" style="margin-bottom: 150px;">
+			<!--<a class="single_profile_photo" href="" data-toggle="modal" data-target="#myModal">-->
+				<!--<div class="wrap" style="background: url('http://ipfs.io/ipfs/QmS1zUfLZeyHu2PY8uZNrLXBE6yoS3XUed9H9iE4gNPErr') no-repeat center center; background-size: contain;">-->
+					<!--<div class="hover col-12">-->
+						<!--<div class="col-10 offset-1">-->
+							<!--<p class="hover_info">34 <i class="fa fa-circle-thin" aria-hidden="true"></i></p>-->
+							<!--<p class="hover_info">28 <i class="fa fa-comment-o" aria-hidden="true"></i></p>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</a>-->
+		</div>
+
+			<!-- Modal -->
+		<div id="myModalAddPhoto" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-lg">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">New photo</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="container">
+							<div class="col-md-10 offset-md-1">
+								<div class="form-group ">
+									<div class="input-group">
+											<span class="input-group-btn">
+												<span class="btn btn-primary btn-file" style="height: 40px; margin-top: 20px;">
+													Browse… <input type="file" id="imgInp">
+												</span>
+											</span>
+										<input type="text" class="form-control" readonly>
+									</div>
+									<img id='img-upload'/>
+									<label id="your_comments">Your comments:</label>
+									<input type="text" class="form-control" id="your_comments_input" style="width: 100%; height: auto; margin: 20px auto" placeholder="Enter text">
+									<button id="addPostButton" class="btn btn-primary" type="submit" >Submit</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="myModal" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-lg" style="margin: 115px auto;">
+				<button class="dir" style="top: 50%; left: -40px;"><i class="fa fa-angle-left fa-3x" aria-hidden="true"></i></button>
+				<!-- Modal content-->
+				<div class="modal-content" style="border-radius: 0px;">
+
+					<div class="modal-body" id="popup-photo" style="padding: 0px">
+						<!--<div class="single_profile_photo_inner">
+							<div class="wrap">
+							</div>
+						</div>
+						<div class="inner_panel">
+							<div class="profile_inner" style="padding: 20px 10px 0px">
+								<div class="col-3 " style="display: inline-block; float: left; ">
+									<img src="bootstrap/images/meg.jpg" class="photo mx-auto d-block" style="width: 50px; height: 50px;">
+								</div>
+								<div class="col-8  username" style="display: inline-block;">
+									<h5 style="line-height: 2.4;  font-weight: bold;" >Megan Fox</h5>
+
+								</div>
+							</div>
+							<hr style="width: 80%; margin: 0 auto">
+							<ul class="comments">
+								<li><a href="#">transformer </a>Красиво жить не запретишь</li>
+								<li><a href="#">megan </a><a href="#" class="user_link">@transformer </a>Это точно</li>
+								<li><a href="#">megan </a>Лучшая</li>
+								<li><a href="#">megan </a>Спасибо!</li>
+							</ul>
+							<hr style="width: 80%; margin: 0 auto 10px">
+							<div class="likes" style="width: 80%; margin: 0px 30px 10px">
+								<h5 > 34 <button style="border: none"> <i class="fa fa-circle-thin " aria-hidden="true"></i></button></h5>
+								<h5 > 4 <button style="border: none"> <i class="fa fa-comment-o " aria-hidden="true"></i></button></h5>
+								<p class="date">11 ноября </p>
+							</div>
+
+							<hr style="width: 80%; margin: 0 auto 10px">
+							<textarea placeholder="Добавьте комментарий..."></textarea>
+						</div>-->
+					</div>
+				</div>
+				<button class="dir" style="top: 50%; right: -40px;"><i class="fa fa-angle-right fa-3x" aria-hidden="true"></i></button>
+			</div>
+		</div>
+
+
+		<div id="myModalFollowersList" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-md">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Followers</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body" id="popup-followers">
+						<!--<div class="container">-->
+							<!--<div class="form-group ">-->
+								<!--<ul class="follow_people">-->
+									<!--<li><a href="#">Person1</a></li>-->
+									<!--<li><a href="#">Person1</a></li>-->
+							<!--</div>-->
+						<!--</div>-->
+					</div>
+					<div class="modal-footer">
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="myModalFollowingsList" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-md">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Followings</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body" id="popup-followings">
+						<!--<div class="container">-->
+							<!--<div class="form-group ">-->
+								<!--<ul class="follow_people">-->
+									<!--<li><a href="#">Person1</a></li>-->
+									<!--<li><a href="#">Person1</a></li>-->
+									<!--<li><a href="#">Person1</a></li>-->
+								<!--</ul>-->
+
+							<!--</div>-->
+						<!--</div>-->
+					</div>
+					<div class="modal-footer">
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+</body> <!-- /container -->
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<script src="style.js"></script> <!-- Regina's style -->
+
+<script src="../web3.js"></script>
+<script src="../jquery-3.2.1.min.js"></script>
+<script src="https://wzrd.in/standalone/buffer"></script>
+<script src="https://unpkg.com/ipfs-api@9.0.0/dist/index.js"
+		integrity="sha384-5bXRcW9kyxxnSMbOoHzraqa7Z0PQWIao+cgeg327zit1hz5LZCEbIMx/LWKPReuB"
+		crossorigin="anonymous"></script>
+<script type="text/javascript" src="../functions.js"></script>
+<script src="../renderings.js"></script> <!-- loadProfile -->
+
+<script>
+    var url = location.href;
+    var urlNickname = url.substring(url.indexOf("?")+1);
+    if (url == urlNickname) {
+        alert("1");
+        location = "index.html";
+    }
+
+    try {
+        nicknameIsAvailable(urlNickname, (res) => {
+            if (res == true) {
+                location = "404.html";
+            }
+        });
+    } catch (e) {
+        alert("2");
+        location = "index.html";
+    }
+
+
+    web3.eth.getAccounts((error, result) => {
+        if (error) {
+            location = "login.html";
+        } else {
+            var userAddress = result[0];
+            try {
+                if (userAddress === undefined) {
+                    alert("3");
+                    location = "index.html";
+                } else {
+                    addressIsRegistred(userAddress, (res) => {
+                        if (res == true) {
+                            loadProfile(userAddress, urlNickname);
+
+                        } else {
+                            alert("4");
+                            location = "index.html";
+                        }
+                    });
+                }
+            } catch (e) {
+                alert("5");
+                location = "index.html";
+            }
+        }
+    });
+
+
+    function showFollowersModal() {
+        getUserFollowers(urlNickname, (followers) => {
+            $("#popup-followers").html(`
+				<div class="container">
+					<div class="form-group ">
+						<ul class="followers">
+						</ul>
+					</div>
+				</div>
+			`);
+            followers.forEach(function (follower) {
+                $('.followers').append('<li><a href="profile.html?' + follower +'">' + follower + '</a></li>');
+            });
+		});
+	}
+
+    function showFollowingsModal() {
+        getUserFollowings(urlNickname, (followings) => {
+            $("#popup-followings").html(`
+				<div class="container">
+					<div class="form-group ">
+						<ul class="followings">
+						</ul>
+					</div>
+				</div>
+			`);
+            followings.forEach(function (following) {
+                $('.followings').append('<li><a href="profile.html?' + following +'">' + following + '</a></li>');
+            });
+        });
+    }
+
+	function onSnippetClick(event) {
+		// const post = posts[event.target.dataset.id];
+        const postId = $(this).attr('id');
+
+        getPost(postId, (post) => {
+            $("#popup-photo").html(`
+				<div class="modal-body " style="padding: 0px">
+					<div class="single_profile_photo_inner">
+						<div class="wrap full_img">
+						</div>
+					</div>
+					<div class="inner_panel">
+						<div class="profile_inner" style="padding: 20px 10px 0px">
+							<div class="col-8  username" style="display: inline-block;">
+								<h5 style="line-height: 2.4;  font-weight: bold;" >${post["creator"]}</h5>
+							</div>
+						</div>
+						<hr style="width: 80%; margin: 0 auto">
+						<ul class="comments">
+							<li><a href="profile.html?${post["creator"]}"> ${post["creator"]} </a> ${post["text"]} </li>
+							<li><a id="loadCommentsLi" onclick="updateComments(${postId});">Загрузить комментарии...</a></li>
+						</ul>
+						<hr style="width: 80%; margin: 0 auto 10px">
+						<div class="likes" style="width: 80%; margin: 0px 30px 10px">
+							<h5 > ${post["likesCount"]} <button onclick="likePost(${postId});" style="border: none"> <i class="fa fa-circle-thin " aria-hidden="true"></i></button></h5>
+							<h5 > ${post["commentsCount"]} <button onclick="commentPost(${postId}, $('#commentArea').val());" style="border: none"> <i class="fa fa-comment-o " aria-hidden="true"></i></button></h5>
+							<p class="date"> ${post["timestamp"]} </p>
+						</div>
+
+						<hr style="width: 80%; margin: 0 auto 10px">
+						<textarea id="commentArea" placeholder="Добавьте комментарий..."></textarea>
+					</div>
+				</div>
+			`);
+            $(".full_img").css("background", `url("http://ipfs.io/ipfs/${post["urlPhoto"]}") no-repeat center center`);
+            $(".full_img").css("background-size", `contain`);
+
+        });
+
+
+
+//		document.querySelector("#popup-photo").innerHTML = `
+//		<div class="modal-body " style="padding: 0px">
+//							<div class="single_profile_photo_inner">
+//								<div class="wrap full_img">
+//								</div>
+//							</div>
+//							<div class="inner_panel">
+//								<div class="profile_inner" style="padding: 20px 10px 0px">
+//									<div class="col-3 " style="display: inline-block; float: left; ">
+//										<img src="http://ipfs.io/ipfs/${user.ipfsLink}" class="photo mx-auto d-block" style="width: 50px; height: 50px;">
+//									</div>
+//									<div class="col-8  username" style="display: inline-block;">
+//										<h5 style="line-height: 2.4;  font-weight: bold;" >Megan Fox</h5>
+//
+//									</div>
+//								</div>
+//								<hr style="width: 80%; margin: 0 auto">
+//								<ul class="comments">
+//									<li><a href="#">transformer </a>Красиво жить не запретишь</li>
+//									<li><a href="#">megan </a><a href="#" class="user_link">@transformer </a>Это точно</li>
+//									<li><a href="#">megan </a>Лучшая</li>
+//									<li><a href="#">megan </a>Спасибо!</li>
+//								</ul>
+//								<hr style="width: 80%; margin: 0 auto 10px">
+//								<div class="likes" style="width: 80%; margin: 0px 30px 10px">
+//									<h5 > 34 <button style="border: none"> <i class="fa fa-circle-thin " aria-hidden="true"></i></button></h5>
+//									<h5 > 4 <button style="border: none"> <i class="fa fa-comment-o " aria-hidden="true"></i></button></h5>
+//									<p class="date">11 ноября </p>
+//								</div>
+//
+//								<hr style="width: 80%; margin: 0 auto 10px">
+//								<textarea placeholder="Добавьте комментарий..."></textarea>
+//							</div>
+//						</div>
+//					`
+//		$(".full_img").css("background", `url("http://ipfs.io/ipfs/${post.urlPhoto}") no-repeat center center`);
+
+	}
+
+
+</script>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+
+<script src="../web3.js"></script>
+<script src="../jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../functions.js"></script>
+
+<script>
+    try {
+        web3.eth.getAccounts((error, result) => {
+            if (error) {
+                location = "login.html";
+            } else {
+                var userAddress = result[0];
+                Enstagrm.addressIsRegistred(userAddress, (err, res) => {
+                    if (err) {
+                        console.log(err);
+                        location = "login.html";
+                    } else {
+                        if (res == true) {
+                            Enstagrm.getUserNickname(userAddress, (err, res) => {
+                                if (err) {
+                                    console.log(err);
+                                    location = "login.html";
+                                } else {
+                                    location = "profile.html?" + web3.toAscii(res);
+                                }
+                            });
+                        } else {
+                            location = "login.html";
+                        }
+                    }
+                });
+            }
+        });
+    } catch (e) {
+        location = "login.html";
+    }
+</script>
+
+</html>
