@@ -158,13 +158,21 @@
 	 <script type="text/javascript" src="../functions.js"></script>
 
 	<script>
-        getUserNickname(web3.eth.defaultAccount, (nick) => {
-            getUserProfile( nick, (profile) => {
-                $("#real-name").val(profile["realName"]);
-                $("#bio").val(profile["bio"]);
-                profile.ipfsLink == "" ? $("#avatar").attr("src", "bootstrap/images/altphoto.png") : $("#avatar").attr("src", "http://ipfs.io/ipfs/" + profile.ipfsLink);
-            });
+        web3.eth.getAccounts((error, result) => {
+            if (error) {
+                location = "login.html";
+            } else {
+                var userAddress = result[0];
+                getUserNickname(userAddress, (nick) => {
+                    getUserProfile(nick, (profile) => {
+                        $("#real-name").val(profile["realName"]);
+                        $("#bio").val(profile["bio"]);
+                        profile.ipfsLink == "" ? $("#avatar").attr("src", "bootstrap/images/altphoto.png") : $("#avatar").attr("src", "http://ipfs.io/ipfs/" + profile.ipfsLink);
+                    });
+                });
+            }
         });
+
 	</script>
 	  
 	   	      

@@ -243,8 +243,49 @@
     var url = location.href;
     var urlNickname = url.substring(url.indexOf("?")+1);
     if (url == urlNickname) {
+        alert("1");
         location = "index.html";
     }
+
+    try {
+        nicknameIsAvailable(urlNickname, (res) => {
+            if (res == true) {
+                location = "404.html";
+            }
+        });
+    } catch (e) {
+        alert("2");
+        location = "index.html";
+    }
+
+
+    web3.eth.getAccounts((error, result) => {
+        if (error) {
+            location = "login.html";
+        } else {
+            var userAddress = result[0];
+            try {
+                if (userAddress === undefined) {
+                    alert("3");
+                    location = "index.html";
+                } else {
+                    addressIsRegistred(userAddress, (res) => {
+                        if (res == true) {
+                            loadProfile(userAddress, urlNickname);
+
+                        } else {
+                            alert("4");
+                            location = "index.html";
+                        }
+                    });
+                }
+            } catch (e) {
+                alert("5");
+                location = "index.html";
+            }
+        }
+    });
+
 
     function showFollowersModal() {
         getUserFollowers(urlNickname, (followers) => {
@@ -358,33 +399,6 @@
 
 	}
 
-
-	try {
-        nicknameIsAvailable(urlNickname, (res) => {
-            if (res == true) {
-                location = "404.html";
-            }
-        });
-	} catch (e) {
-        location = "index.html";
-	}
-
-    try {
-        if (userAddress === undefined) {
-            location = "index.html";
-        } else {
-            addressIsRegistred(userAddress, (res) => {
-				if (res == true) {
-					loadProfile(userAddress, urlNickname);
-
-				} else {
-					location = "index.html";
-				}
-            });
-        }
-    } catch (e) {
-        location = "index.html";
-    }
 
 </script>
 

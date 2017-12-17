@@ -22,8 +22,6 @@ web3.eth.getAccounts((error, result) => {
 });
 
 
-
-
 function nicknameIsAvailable(nick, callback) {
     Enstagrm.nicknameIsAvailable(nick, (err, res) => {
         if (err) {
@@ -39,11 +37,13 @@ function addressIsRegistred(address, callback) {
     Enstagrm.addressIsRegistred(address, (err, res) => {
         if (err) {
             console.log(err);
+            alert("6");
             location="index.html";
         } else {
             if (res == true){
                 callback(res);
             } else {
+                alert("7");
                 location="index.html";
             }
         }
