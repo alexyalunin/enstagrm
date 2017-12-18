@@ -26,6 +26,7 @@ i:hover{
 }
 .personal-info{
   margin-top: 130px;
+  margin-bottom: 20px;
   height: 200px;
   display: inline-block;
 }
@@ -173,7 +174,7 @@ textarea{
 p, p i {
   font-size: 30px;
   font-weight: 700;
-  font-family: Cicle Fina;
+  font-family: Proxima-Nova-Thin;
   text-align: center;
   color: #fff;
 
@@ -220,7 +221,7 @@ p, p i:hover{
   display: inline-block;
 }
 
-@media(max-width: 992px){
+@media(max-width: 592px){
   #myModal, .modal, .fade, .hover{
     display: none!important;
   }
@@ -242,12 +243,6 @@ p, p i:hover{
 }
 
 
-@font-face {
-  font-family: "Cicle Fina";
-  src: url("../fonts/Cicle Fina.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}
 @font-face {
   font-family: "Gotham";
   src: url("../fonts/Gotham.ttf") format("truetype");

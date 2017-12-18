@@ -21,9 +21,9 @@
 		 
 	 <nav class="navbar navbar-expand-md navbar-light fixed-top bg-white">
 		 <div class="container">
-			 
-			 
-			 	<a class="navbar-brand " href="index.html"><img src="bootstrap/images/logo.png"></a>
+
+
+			 	<a class="navbar-brand" href="index.html">Enstagrm</a>
 			 			 
 			 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 			 	<span class="navbar-toggler-icon"></span>
@@ -158,13 +158,21 @@
 	 <script type="text/javascript" src="../functions.js"></script>
 
 	<script>
-        getUserNickname(web3.eth.defaultAccount, (nick) => {
-            getUserProfile( nick, (profile) => {
-                $("#real-name").val(profile["realName"]);
-                $("#bio").val(profile["bio"])
-                $("#avatar").attr("src", "http://ipfs.io/ipfs/" + profile.ipfsLink);
-            });
+        web3.eth.getAccounts((error, result) => {
+            if (error) {
+                location = "login.html";
+            } else {
+                var userAddress = result[0];
+                getUserNickname(userAddress, (nick) => {
+                    getUserProfile(nick, (profile) => {
+                        $("#real-name").val(profile["realName"]);
+                        $("#bio").val(profile["bio"]);
+                        profile.ipfsLink == "" ? $("#avatar").attr("src", "bootstrap/images/altphoto.png") : $("#avatar").attr("src", "http://ipfs.io/ipfs/" + profile.ipfsLink);
+                    });
+                });
+            }
         });
+
 	</script>
 	  
 	   	      
